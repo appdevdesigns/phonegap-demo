@@ -13,7 +13,6 @@ import 'can/map/backup';
 
 import Controls from './controls';
 import Models from './models';
-import Navigator from './navigator';
 import TransactionMonitor from './transaction-monitor';
 import { register as registerPlugin } from './plugins';
 
