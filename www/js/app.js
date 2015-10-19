@@ -89,9 +89,6 @@ const app = {
       // Initialize the jQuery Mobile widgets
       $.mobile.initializePage();
 
-      // Activate the Navigator, which will setup routing and load the initial page
-      Navigator.activate('contacts');
-
       // Initialize the transaction monitor
       const monitoredModels = [];
       can.each(Models, Model => {
