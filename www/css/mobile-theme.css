@@ -1,0 +1,88 @@
+.mrgnL10 {margin-left:10px !important}
+.mrgnR10 {margin-right:10px !important}
+
+.mrgnL20 {margin-left:20px !important}
+.mrgnR20 {margin-right:20px !important}
+
+.mrgntop50 {margin-top:30px !important}
+.mrgntop20 {margin-top:20px !important}
+.mrgntop10 {margin-top:10px !important}
+.mrgnbot20 {margin-bottom:20px !important}
+
+.nomrgnLR {margin-left:0 !important;margin-right:0 !important}
+.nomrgnT {margin-top:0}
+.nopadLR {padding-left:0;padding-right:0}
+
+.float-right {float:right}
+
+.padAll2 {padding:2px}
+
+.center {text-align:center}
+
+.prevbal {margin-left:15px;}
+
+h1 span {
+  display:inline-table;
+  width:55%;
+}
+
+.v1 {width:46%}
+.chartlink {
+  display: block;
+  height: 200px;
+  text-indent: -9999px;
+  position: relative;
+  margin-top: -200px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#mpd-quickview h1 {font-size:153px;margin:0}
+
+.defeault tr {
+  border:1px solid lightgray;
+}
+
+.defeault  th {
+  background-color:#e9e9e9;
+}
+
+.defeault  tr:nth-child(even) {
+  background: #F1F1F1;
+}
+
+#selected-month .ui-collapsible-content {
+  padding-right:0;
+  padding-left:0;
+  padding-top:0;
+}
+
+#abv table tbody tr {
+  cursor:pointer;
+}
+
+#abv table tbody tr:hover {
+  cursor:pointer;
+  background-color:#fff;
+}
+
+#dv .ui-state-disabled {opacity:1;}
+.cmbborder {border-top:3px solid lightgray}
+
+.btm-border {background-color:lightgray;padding: 2px;}
+.btm-border td{padding: 3px;}
+
+.blue-row td:nth-child(1) { color:#156cf9}
+.blue-row td:nth-child(2) { border:2px solid #156cf9;color:#156cf9}
+
+.lblue-row td:nth-child(1) { color:#04eaff}
+.lblue-row td:nth-child(2) { border:2px solid #04eaff;color:#04eaff}
+
+.orange-row td:nth-child(2) { color:#ff7f1a}
+.orange-row td:nth-child(1) { border:2px solid #ff7f1a;color:#ff7f1a}
+
+.green-row td:nth-child(1) { color:#00eb00}
+.green-row td:nth-child(2) { border:2px solid #00eb00;color:#00eb00}
+
+.dgreen-row td:nth-child(1) { color:#3bab2d}
+.dgreen-row td:nth-child(2) { border:2px solid #3bab2d;color:#3bab2d}
