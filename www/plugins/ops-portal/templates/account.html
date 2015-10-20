@@ -14,66 +14,13 @@
 			</tr>
 		</thead>
 		<tbody>
+			{{#each periods}}
 			<tr onclick="window.document.location='#selected-month';">
-				<td>Dec</td>
-				<td>10000</td>
-				<td>10000</td>
+				<td>{{date}}</td>
+				<td>{{income}}</td>
+				<td>{{expenses}}</td>
 			</tr>
-			<tr>
-				<td>Nov</td>
-				<td>8000</td>
-				<td>8000</td>
-			</tr>
-			<tr>
-				<td>Oct</td>
-				<td>12000</td>
-				<td>12000</td>
-			</tr>
-			<tr>
-				<td>Sept</td>
-				<td>3000</td>
-				<td>3000</td>
-			</tr>
-			<tr>
-				<td>Aug</td>
-				<td>5000</td>
-				<td>5000</td>
-			</tr>
-			<tr>
-				<td>Jul</td>
-				<td>15000</td>
-				<td>15000</td>
-			</tr>
-			<tr>
-				<td>Jun</td>
-				<td>9000</td>
-				<td>9000</td>
-			</tr>
-			<tr>
-				<td>May</td>
-				<td>7000</td>
-				<td>7000</td>
-			</tr>
-			<tr>
-				<td>Apr</td>
-				<td>3000</td>
-				<td>3000</td>
-			</tr>
-			<tr>
-				<td>Mar</td>
-				<td>10000</td>
-				<td>10000</td>
-			</tr>
-			<tr>
-				<td>Feb</td>
-				<td>11000</td>
-				<td>11000</td>
-			</tr>
-			<tr>
-				<td>Jan</td>
-				<td>12000</td>
-				<td>12000</td>
-			</tr>
+			{{/each}}
 		</tbody>
 	</table>
 </div>

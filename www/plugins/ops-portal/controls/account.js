@@ -24,6 +24,7 @@ export default Page.extend('AccountControl', {
           console.log(err);
         })
         .then((list) => {
+          this.scope.attr('periods', list);
           this.updateChart(list);
         })
     },
