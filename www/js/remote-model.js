@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import can from 'can';
 
-const server = 'http://172.20.10.8:1337';
+const server = 'http://173.16.6.59:1337';
 
 export default can.Model.extend('RemoteModel', {
   install() {
@@ -13,7 +13,7 @@ export default can.Model.extend('RemoteModel', {
 
   request({ url, method = 'GET', params }) {
     return $.ajax({
-      url: `${server}/${this.url}`,
+      url: `${server}/${this.url}${url}`,
       method,
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default can.Model.extend('RemoteModel', {
 
   findAll(params, success, error) {
     return this.request({
-      url: `/${this.fullName}.json`,
+      url: '',
       params,
     }).done(success).fail(error);
   },
@@ -31,13 +31,13 @@ export default can.Model.extend('RemoteModel', {
   findOne(params, success, error) {
     const id = params[this.id];
     return this.request({
-      url: `/${this.fullName}/${id}.json`,
+      url: `/${id}`,
     }).then(model => model || null).done(success).fail(error);
   },
 
   create(params, success, error) {
     return this.request({
-      url: `/${this.fullName}.json`,
+      url: '',
       method: 'POST',
       params,
     }).done(success).fail(error);
@@ -45,7 +45,7 @@ export default can.Model.extend('RemoteModel', {
 
   update(id, params, success, error) {
     return this.request({
-      url: `/${this.fullName}/${id}.json`,
+      url: `/${id}`,
       method: 'PUT',
       params,
     }).then(model => model || null).done(success).fail(error);
@@ -53,7 +53,7 @@ export default can.Model.extend('RemoteModel', {
 
   destroy(id, params, success, error) {
     return this.request({
-      url: `/${this.fullName}/${id}.json`,
+      url: `/${id}`,
       method: 'DELETE',
     }).done(success).fail(error);
   },
