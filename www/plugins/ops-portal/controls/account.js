@@ -3,6 +3,7 @@
 import AccountModel from '../models/account';
 import highchartsModule from 'highcharts';
 const { Highcharts } = highchartsModule;
+import Navigator from 'core/navigator';
 
 import Page from 'core/controls/page';
 
@@ -25,6 +26,7 @@ export default Page.extend('AccountControl', {
         })
         .then((list) => {
           this.scope.attr('periods', list);
+          this.scope.attr('balance', list[0].beginningBalance - list[0].expenses)
           this.updateChart(list);
         })
     },
@@ -87,4 +89,8 @@ export default Page.extend('AccountControl', {
           }]
       });
     },
+
+    '.back click'(){
+      Navigator.openParentPage();
+    }
   });
