@@ -1,6 +1,8 @@
 'use strict';
 
 import Page from 'core/controls/page';
+import Navigator from 'core/navigator';
+
 var fillerText = 'http://173.16.6.59:1337/mobile/policy'
 export default Page.extend('ServerControl', {
   pageId: 'server',
@@ -62,5 +64,8 @@ export default Page.extend('ServerControl', {
       this.validateServer();
       //Prevent default submit behavior
       return false;
-  }  
+  },  
+  '.cancel click'() {
+      Navigator.openPage('landing');
+  }
 });

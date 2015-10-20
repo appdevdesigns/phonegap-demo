@@ -4,6 +4,7 @@ import highchartsModule from 'highcharts';
 const { Highcharts } = highchartsModule;
 
 import Page from 'core/controls/page';
+import Navigator from 'core/navigator';
 
 export default Page.extend('LandingControl', {
   pageId: 'landing',
@@ -93,4 +94,7 @@ export default Page.extend('LandingControl', {
       }
     );
   },
+  '.edit-server-url click'() {
+      Navigator.openPage('server');
+  }
 });
