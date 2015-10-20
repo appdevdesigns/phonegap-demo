@@ -18,14 +18,14 @@ export default Page.extend('AccountControl', {
 
       // Initialize the control scope and render it
       this.render();
-     
+
       AccountModel.findAll()
-      .fail(function(err){
-        console.log(err);
-      })
-      .then((list) => {
-        this.updateChart(list);
-      })
+        .fail(function (err) {
+          console.log(err);
+        })
+        .then((list) => {
+          this.updateChart(list);
+        })
     },
 
     updateChart(list) {
@@ -33,13 +33,20 @@ export default Page.extend('AccountControl', {
       var incomeData = [];
       var expenseData = [];
       var netData = [];
-      
-      list.forEach(function(item) {
-        incomeData.push(item.income);
-        expenseData.push(-item.expenses);
-        netData.push(item.income - item.expenses);
-      }, this);
-      
+      var monthData = [];
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+      // We expect to receive period data newest to oldest.
+      // We need to reverse the data order in the chart and
+      // plot the previous 12 periods.
+      for (var i = 11; i >= 0; --i) {
+        incomeData.push(list[i].income);
+        expenseData.push(-list[i].expenses);
+        netData.push(list[i].income - list[i].expenses);
+        var date = new Date(list[i].date);
+        monthData.push(monthNames[date.getMonth()]);
+      };
+
       $('#year').highcharts({
         colors: ['#3D9D50', '#DB1A23', '#000'],
         chart: {
@@ -49,7 +56,7 @@ export default Page.extend('AccountControl', {
           text: 'Income, Expenses'
         },
         xAxis: {
-          categories: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep']
+          categories: monthData
         },
         yAxis: {
           title: "",
