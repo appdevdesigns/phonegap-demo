@@ -16,6 +16,8 @@ import Models from './models';
 import TransactionMonitor from './transaction-monitor';
 import { register as registerPlugin } from './plugins';
 
+let Plugins = null;
+
 // Load the configuration file
 import config from 'config.json';
 
@@ -23,7 +25,7 @@ const app = {
   // Initialize the applications
   initialize() {
     // Bind to startup events
-    document.addEventListener('deviceready', this.onDeviceReady, false);
+    document.addEventListener('deviceready', () => { this.onDeviceReady(); }, false);
   },
 
   // Load all plugins
@@ -36,14 +38,12 @@ const app = {
         // Register the plugin with the system
         registerPlugin(pluginName, plugin);
 
-        // Run the plugin's initialize method if it exists
-        // If the initialize function returns a promise, the promise returned by loadPlugins will
-        // not resolve until that promise resolves as well
-        if (can.isFunction(plugin.initialize)) {
-          return plugin.initialize();
-        }
+        return plugin;
       });
-    }));
+    })).then(function(plugins) {
+      Plugins = plugins;
+      return plugins;
+    });
   },
 
   // Install the application
@@ -67,6 +67,24 @@ const app = {
     }));
   },
 
+  // Activate all registered plugins by calling their initialize hooks
+  activatePlugins() {
+    can.each(Plugins, plugin => {
+      if (can.isFunction(plugin.initialize)) {
+        return plugin.initialize();
+      }
+    });
+  },
+
+  // Create control instances for all of the control placeholders on the page
+  initializeControls() {
+    // Turn all placeholder elements with a "data-control" attribute that matches a control id
+    // into an instance of that control type
+    can.each(Controls, Control => {
+      const control = new Control(`[data-control=${Control.controlId}]`, {}); // jshint ignore:line
+    });
+  },
+
   // "deviceready" event handler
   onDeviceReady() {
     console.log('Device is ready');
@@ -79,14 +97,12 @@ const app = {
     }).then(() => {
       console.log('Models loaded');
 
-      // Turn all placeholder elements with a "data-control" attribute that matches a control id
-      // into an instance of that control type
-      can.each(Controls, Control => {
-        const control = new Control(`[data-control=${Control.controlId}]`, {}); // jshint ignore:line
-      });
+      this.initializeControls();
 
       // Initialize the jQuery Mobile widgets
       $.mobile.initializePage();
+
+      this.activatePlugins();
 
       // Initialize the transaction monitor
       const monitoredModels = [];

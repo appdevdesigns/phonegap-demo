@@ -62,7 +62,7 @@ const Navigator = {
 
     // If no page is set, navigate to the default page
     // The page attribute will be set if the user directly navigated to a URL with a hash.
-    if (defaultPage || !can.route.attr('page')) {
+    if (!can.route.attr('page') && defaultPage) {
       Navigator.openPage(defaultPage);
     }
   },
