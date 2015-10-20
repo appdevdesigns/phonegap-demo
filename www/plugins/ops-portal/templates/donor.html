@@ -1,0 +1,56 @@
+<div data-role="header">
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline back">Back</a>
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline edit">Edit</a>
+    <h1>&nbsp;</h1>
+</div>
+<div data-role="main" class="ui-content">
+    <div class="ui-grid-a">
+
+        <div class="ui-block-a">
+            <div class="ui-body ui-body-d">
+                <!--img src="img/man.jpg" class="center"/-->
+            </div>
+        </div>
+        <div class="ui-block-b">
+
+                <label for="text-basic">{{donor.name}}</label>
+                <input type="text" disabled="disabled" name="text-basic" id="text-basic" value="{{donor.donors_homePhone}}">
+                <input type="text" disabled="disabled" name="text-basic" id="text-basic" value="{{donor.donors_email}}">
+        </div>
+    </div>
+        <hr>
+    <div>
+        <h3 class="nomrgnT">Giving History:</h3>
+        <table data-role="tables" class="ui-responsive ui-table defeault">
+            <thead>
+                <tr>
+                    <th>(date)</td>
+                    <th>(amount)</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dec 2015</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td>Nov 2015</td>
+                    <td>12000</td>
+                </tr>
+                <tr>
+                    <td>Oct 2015</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>				
+            </tbody>
+        </table>			
+    </div>
+
+</div>

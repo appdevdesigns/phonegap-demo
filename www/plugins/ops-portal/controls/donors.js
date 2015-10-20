@@ -26,8 +26,15 @@ export default Page.extend('Donors', {
   },
   
   '.back click'() {
-      Navigator.openPage('landing');
+      Navigator.openParentPage();
   },
+    
+  '.donor click'(element){
+      const donorId = $(element).data('id');
 
-  
+    // Open the clicked donor
+    Navigator.openPage('donor', {
+      donorId: donorId,
+    });   
+  },
 });
