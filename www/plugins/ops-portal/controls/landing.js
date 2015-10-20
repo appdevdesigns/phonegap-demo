@@ -1,5 +1,6 @@
 'use strict';
 
+import Navigator from 'core/navigator';
 import highchartsModule from 'highcharts';
 const { Highcharts } = highchartsModule;
 
@@ -93,4 +94,10 @@ export default Page.extend('LandingControl', {
       }
     );
   },
+  
+  '.donors click'() {
+      Navigator.openPage('donors');
+  },
+
+  
 });
