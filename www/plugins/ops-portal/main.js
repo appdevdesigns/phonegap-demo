@@ -2,6 +2,7 @@
 
 // Load controls
 import Landing from './controls/landing';
+import Account from './controls/account';
 
 // Load models
 import Navigator from 'core/navigator';
@@ -13,7 +14,7 @@ const plugin = {
     Navigator.activate('landing');
   },
 
-  controls: { Landing },
+  controls: { Landing, Account },
   models: {},
 };
 

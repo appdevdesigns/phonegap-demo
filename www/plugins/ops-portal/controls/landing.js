@@ -5,6 +5,8 @@ const { Highcharts } = highchartsModule;
 
 import Page from 'core/controls/page';
 
+import Navigator from 'core/navigator';
+
 export default Page.extend('LandingControl', {
   pageId: 'landing',
   template: 'plugins/ops-portal/templates/landing.html',
@@ -93,4 +95,8 @@ export default Page.extend('LandingControl', {
       }
     );
   },
+  "#average click" : function(element, event){
+    console.log("average clicked");
+    Navigator.openPage("account");
+  }
 });
