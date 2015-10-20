@@ -21,13 +21,7 @@ export default Page.extend('AccountControl', {
     },
 
     initializeHighcharts() {
-      // // By default they do not add a comma to our values
-      // Highcharts.setOptions({
-      //   lang: {
-      //     thousandsSep: ',',
-      //   },
-      // });
-
+ 
       $('#year').highcharts({
         colors: ['#3D9D50', '#DB1A23', '#000'],
         chart: {
