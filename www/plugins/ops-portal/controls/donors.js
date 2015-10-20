@@ -2,6 +2,7 @@
 
 import Navigator from 'core/navigator';
 import Page from 'core/controls/page';
+import Donor from '../models/donor';
 
 export default Page.extend('Donors', {
   pageId: 'donors',
@@ -14,7 +15,14 @@ export default Page.extend('Donors', {
 
     // Initialize the control scope and render it
     this.render();
-
+      
+    Donor.findAll()
+    .fail(function(err){
+        console.log(err);
+    })
+    .then((list) => {
+      this.scope.attr('donors', list);
+    })
   },
   
   '.back click'() {

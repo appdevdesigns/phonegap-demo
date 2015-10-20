@@ -5,10 +5,9 @@
 </div>
 <div data-role="main" class="ui-content">
     <ul data-role="listview" class="mrgntop10">
-      <li><a href="#dv">Steve Rodgers</a></li>
-      <li><a href="#dv">Nick Fury</a></li>
-      <li><a href="#dv">Bruce Banner</a></li>
-      <li><a href="#dv">Tony Stark</a></li>
+      {{#each donors}}
+      <li class="donor" data-id="{{donor_id}}"><a>{{name}}</a></li>
+      {{/each}}
     </ul>	
 </div>
 

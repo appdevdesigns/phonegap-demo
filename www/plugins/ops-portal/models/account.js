@@ -1,9 +1,10 @@
 'use strict';
 
-import RemoteModel from '../remote-model';
+import RemoteModel from 'core/remote-model';
 
-const Account = RemoteModel.extend('Account', {
+export default RemoteModel.extend('AccountModel', {
 	id: 'id',
+    url: 'opstool-account/account/period',
 	attributes: {
 		id: 'int|primarykey|autoincrement|unique',
 		date: 'string',
@@ -22,4 +23,4 @@ const Account = RemoteModel.extend('Account', {
 		expenses: 0,
 		closed: 0
 	},
-}
+}, {});

@@ -18,7 +18,7 @@ export default can.Model.extend('RemoteModel', {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(res => res.data);
+    });
   },
 
   findAll(params, success, error) {
