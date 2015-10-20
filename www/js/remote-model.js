@@ -1,0 +1,60 @@
+'use strict';
+
+import $ from 'jquery';
+import can from 'can';
+
+const server = 'http://172.20.10.8:1337';
+
+export default can.Model.extend('RemoteModel', {
+  install() {
+    // Remote models need no installation, so simply return a resolved promise
+    return Promise.resolve();
+  },
+
+  request({ url, method = 'GET', params }) {
+    return $.ajax({
+      url: `${server}/${this.url}`,
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(res => res.data);
+  },
+
+  findAll(params, success, error) {
+    return this.request({
+      url: `/${this.fullName}.json`,
+      params,
+    }).done(success).fail(error);
+  },
+
+  findOne(params, success, error) {
+    const id = params[this.id];
+    return this.request({
+      url: `/${this.fullName}/${id}.json`,
+    }).then(model => model || null).done(success).fail(error);
+  },
+
+  create(params, success, error) {
+    return this.request({
+      url: `/${this.fullName}.json`,
+      method: 'POST',
+      params,
+    }).done(success).fail(error);
+  },
+
+  update(id, params, success, error) {
+    return this.request({
+      url: `/${this.fullName}/${id}.json`,
+      method: 'PUT',
+      params,
+    }).then(model => model || null).done(success).fail(error);
+  },
+
+  destroy(id, params, success, error) {
+    return this.request({
+      url: `/${this.fullName}/${id}.json`,
+      method: 'DELETE',
+    }).done(success).fail(error);
+  },
+}, {});
