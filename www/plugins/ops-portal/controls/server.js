@@ -1,7 +1,6 @@
 'use strict';
 
 import Page from 'core/controls/page';
-var serverURL = null;
 var fillerText = 'http://173.16.6.59:1337/mobile/policy'
 export default Page.extend('ServerControl', {
   pageId: 'server',
@@ -13,7 +12,7 @@ export default Page.extend('ServerControl', {
     this._super(...arguments);
 
     // Initialize the control scope and render it
-    this.scope.attr('server', fillerText);
+    this.scope.attr('server', window.localStorage.getItem('serverURL') || fillerText);
     
     this.scope.attr('validating', can.compute(() => {
         return this.scope.attr('status')==='validating';
@@ -37,9 +36,9 @@ export default Page.extend('ServerControl', {
   
   validateServer:function () {
     this.scope.attr('status', 'validating');
-
+    var serverURL = this.scope.attr('server');
     $.ajax({
-      url:this.scope.attr('server')
+      url:serverURL
     })
     .fail((err, textStatus, errorThrown) =>{
         console.log(err);
@@ -54,6 +53,7 @@ export default Page.extend('ServerControl', {
     .then((data) => {
         // Do something with data
         this.scope.attr('status', 'good');
+        window.localStorage.setItem("serverURL", serverURL);
     });
 
   },
