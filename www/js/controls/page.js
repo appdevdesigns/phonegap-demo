@@ -31,7 +31,7 @@ const Page = Control.extend({
   extend() {
     // Call the original extend function
     const PageControl = this._super(...arguments);
-    Navigator.registerPage(PageControl.pageId, PageControl.parentId, PageControl.routeAttr ? `:${PageControl.routeAttr}` : null);
+    Navigator.registerPage(PageControl.pageId, PageControl.parentId, PageControl.pattern || (PageControl.routeAttr ? `:${PageControl.routeAttr}` : null));
 
     // Add the page placeholder to the root level of the document where jQuery Mobile will recognize it
     const $control = $('<div>').attr({
