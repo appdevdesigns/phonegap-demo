@@ -4,8 +4,10 @@ import $ from 'jquery';
 import can from 'can';
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
+import Config from 'core/config';
 
-const fillerText = 'http://173.16.6.59:1337/mobile/policy';
+const defaultServer = 'http://173.16.6.59:1337';
+
 export default Page.extend('ServerControl', {
   pageId: 'server',
   template: 'plugins/ops-portal/templates/server.html',
@@ -16,46 +18,40 @@ export default Page.extend('ServerControl', {
     this._super(...arguments);
 
     // Initialize the control scope and render it
-    this.scope.attr('server', window.localStorage.getItem('serverURL') || fillerText);
-
+    this.scope.attr('server', Config.getServer() || defaultServer);
     ['validating', 'good', 'noResponse', 'badResponse'].forEach(state => {
-      this.scope.attr(state, can.compute(() => {
-        return this.scope.attr('status') === state;
-      }));
+      this.scope.attr(state, can.compute(() => this.scope.attr('status') === state));
     });
 
     this.render();
   },
 
-  validateServer:function() {
+  validateServer() {
     this.scope.attr('status', 'validating');
     const serverURL = this.scope.attr('server');
-    $.ajax({
-      url: serverURL,
-    })
-    .fail((err, textStatus, errorThrown) => {
+    Config.loadConfig(serverURL).then(() => {
+      // The configuration loaded sucessfully
+      this.scope.attr('status', 'good');
+
+      setTimeout(() => {
+        Navigator.openPage('landing')
+      }, 5000);
+    }).fail(err => {
       console.log(err);
 
-      // if status not found
+      // A status code of 0 means "not found"
       if (err.status === 0) {
         this.scope.attr('status', 'noResponse');
       } else if (err.status >= 400 && err.status < 500) {
         this.scope.attr('status', 'badResponse');
       }
-    }).then((data) => {
-      // Do something with data
-      this.scope.attr('status', 'good');
-      window.localStorage.setItem('serverURL', serverURL);
-      setTimeout(() => {
-        Navigator.openPage('landing')
-      }, 5000);
     });
   },
 
   'form submit'() {
     this.validateServer();
 
-    //Prevent default submit behavior
+    // Prevent default submit behavior
     return false;
   },
 
