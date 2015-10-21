@@ -29,6 +29,10 @@ export default Page.extend('Donors', {
       Navigator.openParentPage();
   },
     
+  '.add click'() {
+      Navigator.openPage('edit-donor', {editDonorId: 'new'});
+  },
+    
   '.donor click'(element){
       const donorId = $(element).data('id');
 
@@ -37,4 +41,5 @@ export default Page.extend('Donors', {
       donorId: donorId,
     });   
   },
+  
 });

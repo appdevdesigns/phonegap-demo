@@ -1,0 +1,48 @@
+<div data-role="header">
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline back">Back</a>
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline import">Import</a>
+    <h1>{{donor.name}}</h1>
+</div>
+
+<div data-role="main" class="ui-content">
+    <label for="fname">First name:</label>
+    <div class="ui-grid-a">
+        <div class="ui-block-a padAll2">
+                <input type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_firstName}}">
+        </div>
+        <div class="ui-block-b padAll2">
+                <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_lastName}}">
+        </div>
+    </div>
+
+    <label for="fname">Nickname:</label>
+    <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="">
+
+    <div class="ui-grid-a">
+        <div class="ui-block-a padAll2">
+                <label for="fname">Phone</label>
+                <input type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_homePhone}}">
+        </div>
+        <div class="ui-block-b padAll2">
+                <label for="fname">Email</label>
+                <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_email}}">
+        </div> 
+    </div>
+    <div class="ui-content corner-all ui-shadow mrgnbot20">
+        <label for="fname">Giving</label>
+        <div class="ui-grid-a">
+            <div class="ui-block-a padAll2">
+
+                    <input type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="" placeholder="Amount">
+            </div>
+            <div class="ui-block-b padAll2">
+
+                    <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="" placeholder="Value">
+            </div>
+        </div>	
+    </div>
+    <label for="info">Additional Information:</label>
+    <textarea name="addinfo" id="info"></textarea>
+</div>
+<button class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right">Save</button
+
