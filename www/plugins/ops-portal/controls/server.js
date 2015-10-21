@@ -56,6 +56,7 @@ export default Page.extend('ServerControl', {
         // Do something with data
         this.scope.attr('status', 'good');
         window.localStorage.setItem("serverURL", serverURL);
+        setTimeout(function() { Navigator.openPage('landing') }, 5000);
     });
 
   },
@@ -65,7 +66,7 @@ export default Page.extend('ServerControl', {
       //Prevent default submit behavior
       return false;
   },  
-  '.cancel click'() {
+  '.back click'() {
       Navigator.openPage('landing');
   }
 });
