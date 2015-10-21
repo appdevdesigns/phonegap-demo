@@ -1,0 +1,23 @@
+<div data-role="header">
+  <h3>Server</h3>
+</div>
+<div role="main" class="ui-content">
+  <form>
+    <label for="server-url">Server URL:</label>
+    <input type="text" id="server-url" can-value="server" autofocus>
+    <button type="submit" class="ui-btn ui-corner-all create">Submit</button>
+  </form>
+  {{#validating}}
+    <p><i class="fa fa-spinner fa-spin" style="color:grey;"></i> Validating...</p>
+  {{/validating}}
+  {{#good}}
+    <p><i class="fa fa-circle" style="color:green;"></i> Looks good!</p>
+  {{/good}}
+  {{#noResponse}}
+    <p><i class="fa fa-circle" style="color:red;"></i> Error: Can't connect. Do you need your VPN on?</p>
+  {{/noResponse}}
+  {{#badResponse}}
+    <p><i class="fa fa-circle" style="color:yellow;"></i> It doesn't look like this server accepts our mobile app. <br />Ask your administragor for the proper server.</p>
+  {{/badResponse}}
+  <button class="ui-btn ui-corner-all cancel" type="button">Cancel</button>
+</div>

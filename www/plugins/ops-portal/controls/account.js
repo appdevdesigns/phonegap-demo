@@ -25,9 +25,59 @@ export default Page.extend('AccountControl', {
           console.log(err);
         })
         .then((list) => {
+          const avePercentRedThreshold = 80
+          const avePercentYellowThreshold = 100
+          const monthsLeftRedThreshold = 1
+          const monthsLeftYellowThreshold = 3
+
+          // update bar chart
+          this.updateChart(list);
+
+          var numMonths = ((list.length - 1) < 12) ? (list.length() - 1) : 12;
+          var aveIncome = 0; // average income past 12 months
+          var aveExpenses = 0; // average expenses past 12 months
+          var aveDelta = 0; // average difference between income and expenses
+          for (var i = 1; i <= numMonths; ++i) {
+            aveIncome += list[i].income;
+            aveExpenses += list[i].expenses;
+            aveDelta += list[i].income - list[i].expenses;
+          }
+          aveIncome /= numMonths;
+          aveExpenses /= numMonths;
+          aveDelta /= numMonths;
+
+          var avePercent = (aveIncome / aveExpenses) * 100;
+
+          var avePercentBg = 'green'; // average % background
+          if (avePercent < avePercentRedThreshold) {
+            avePercentBg = 'red';
+          } else if (avePercent < avePercentYellowThreshold) {
+            avePercentBg = 'yellow';
+          }
+
+          var monthsLeftBg = 'green'; // months left background
+          var monthsLeft;
+          if (aveDelta < 0) {
+            monthsLeft = list[0].beginningBalance / -aveDelta;
+            if (monthsLeft < monthsLeftRedThreshold) {
+              monthsLeftBg = 'red';
+            } else if (monthsLeft < monthsLeftYellowThreshold) {
+              monthsLeftBg = 'yellow';
+            }
+
+          }
+          else {
+            monthsLeft = "<i class='fa fa-thumbs-o-up'></i>";
+          }
+
+          // assign scope variables
           this.scope.attr('periods', list);
           this.scope.attr('balance', list[0].beginningBalance - list[0].expenses)
-          this.updateChart(list);
+          this.scope.attr('avePercent', avePercent.toFixed(0) + "%");
+          this.scope.attr('avePercentBg', avePercentBg);
+          this.scope.attr('monthsLeft', monthsLeft);
+          this.scope.attr('monthsLeftBg', monthsLeftBg);
+
         })
     },
 
@@ -39,10 +89,13 @@ export default Page.extend('AccountControl', {
       var monthData = [];
       const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+      var numMonths = 12; // number of months to plot
+      if (list.length < numMonths) {
+        numMonths = list.length();
+      }
       // We expect to receive period data newest to oldest.
-      // We need to reverse the data order in the chart and
-      // plot the previous 12 periods.
-      for (var i = 11; i >= 0; --i) {
+      // We need to reverse the data order in the chart.
+      for (var i = (numMonths - 1); i >= 0; --i) {
         incomeData.push(list[i].income);
         expenseData.push(-list[i].expenses);
         netData.push(list[i].income - list[i].expenses);
@@ -90,7 +143,7 @@ export default Page.extend('AccountControl', {
       });
     },
 
-    '.back click'(){
+    '.back click'() {
       Navigator.openParentPage();
     }
   });

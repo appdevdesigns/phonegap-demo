@@ -5,7 +5,7 @@ import Landing from './controls/landing';
 import Account from './controls/account';
 import Donors from './controls/donors';
 import Donor from './controls/donor';
-
+import Server from './controls/server';
 
 // Load models
 import Navigator from 'core/navigator';
@@ -19,8 +19,9 @@ const plugin = {
     Navigator.activate('landing');
   },
 
-  controls: { Landing, Account, Donors, Donor },
+  controls: { Landing, Account, Donors, Donor, Server },
   models: { DonorModel, AccountModel },
+
 };
 
 export default plugin;
