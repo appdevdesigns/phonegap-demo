@@ -17,40 +17,40 @@ export default Model.extend('RemoteModel', {
     });
   },
 
-  findAll(params, success, error) {
+  findAll(params) {
     return this.request({
       url: '',
       params,
-    }).done(success).fail(error);
+    });
   },
 
-  findOne(params, success, error) {
+  findOne(params) {
     const id = params[this.id];
     return this.request({
       url: `/${id}`,
-    }).then(model => model || null).done(success).fail(error);
+    }).then(model => model || null);
   },
 
-  create(params, success, error) {
+  create(params) {
     return this.request({
       url: '',
       method: 'POST',
       params,
-    }).done(success).fail(error);
+    });
   },
 
-  update(id, params, success, error) {
+  update(id, params) {
     return this.request({
       url: `/${id}`,
       method: 'PUT',
       params,
-    }).then(model => model || null).done(success).fail(error);
+    }).then(model => model || null);
   },
 
-  destroy(id, params, success, error) {
+  destroy(id, params) {
     return this.request({
       url: `/${id}`,
       method: 'DELETE',
-    }).done(success).fail(error);
+    });
   },
 }, {});
