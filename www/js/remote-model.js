@@ -9,12 +9,9 @@ export default Model.extend('RemoteModel', {
     return Promise.resolve();
   },
 
-  request({ url, method = 'GET', params }) {
-    return Comm.request({
-      url: this.url + url,
-      method,
-      params,
-    });
+  request(options) {
+    options.url = this.url + options.url;
+    return Comm.request(options);
   },
 
   findAll(params) {
@@ -36,6 +33,7 @@ export default Model.extend('RemoteModel', {
       url: '',
       method: 'POST',
       params,
+      retryFailures: true,
     });
   },
 
@@ -44,6 +42,7 @@ export default Model.extend('RemoteModel', {
       url: `/${id}`,
       method: 'PUT',
       params,
+      retryFailures: true,
     }).then(model => model || null);
   },
 
@@ -51,6 +50,7 @@ export default Model.extend('RemoteModel', {
     return this.request({
       url: `/${id}`,
       method: 'DELETE',
+      retryFailures: true,
     });
   },
 }, {});
