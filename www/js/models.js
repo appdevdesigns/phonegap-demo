@@ -12,5 +12,7 @@ export function register(Model) {
 }
 
 // Register core models
+import HTTPRequest from './models/httpRequest';
 import Transaction from './models/transaction';
+register(HTTPRequest);
 register(Transaction);

@@ -1,9 +1,7 @@
 'use strict';
 
-import $ from 'jquery';
 import Model from './model';
-
-const server = 'http://173.16.6.59:1337';
+import Comm from './comm';
 
 export default Model.extend('RemoteModel', {
   install() {
@@ -12,13 +10,11 @@ export default Model.extend('RemoteModel', {
   },
 
   request({ url, method = 'GET', params }) {
-    return $.ajax({
-      url: `${server}/${this.url}${url}`,
+    return Comm.request({
+      url: this.url + url,
       method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(res => res.data);
+      params,
+    });
   },
 
   findAll(params, success, error) {
