@@ -4,7 +4,10 @@ import './donors';
 
 import Navigator from 'core/navigator';
 import Page from 'core/controls/page';
+
+// Import Models
 import Donor from '../models/donor';
+import Donations from '../models/donations';
 
 
 export default Page.extend('Donor', {
@@ -25,6 +28,14 @@ export default Page.extend('Donor', {
     this.setDonor(null);
     this.render();
     
+    // Load donations from server
+    Donations.findAll({ donor_id: can.route.attr('donorId') })
+    .fail(function(err){
+        console.log(err);
+    })
+    .then((list) => {
+        this.scope.attr('donations', list );
+    })
     
 
   },

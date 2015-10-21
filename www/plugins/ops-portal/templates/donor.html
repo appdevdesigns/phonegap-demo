@@ -29,26 +29,12 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each donations}}
                 <tr>
-                    <td>Dec 2015</td>
-                    <td>8000</td>
+                    <td>{{donItem_dateReceived}}</td>
+                    <td>{{donItem_amount}}</td>
                 </tr>
-                <tr>
-                    <td>Nov 2015</td>
-                    <td>12000</td>
-                </tr>
-                <tr>
-                    <td>Oct 2015</td>
-                    <td>3000</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>				
+                {{/each}}
             </tbody>
         </table>			
     </div>

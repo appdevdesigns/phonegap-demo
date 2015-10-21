@@ -1,5 +1,7 @@
 'use strict';
 
+import Navigator from 'core/navigator';
+
 // Load controls
 import Landing from './controls/landing';
 import Account from './controls/account';
@@ -9,7 +11,7 @@ import Server from './controls/server';
 import EditDonor from './controls/edit-donor';
 
 // Load models
-import Navigator from 'core/navigator';
+import DonationsModel from './models/donations';
 import DonorModel from './models/donor';
 import AccountModel from './models/account';
 
@@ -21,7 +23,7 @@ const plugin = {
   },
 
   controls: { Landing, Account, Donors, Donor, Server, EditDonor },
-  models: { DonorModel, AccountModel },
+  models: { DonorModel, AccountModel, DonationsModel },
 
 };
 
