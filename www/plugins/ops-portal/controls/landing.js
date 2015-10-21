@@ -94,7 +94,8 @@ export default Page.extend('LandingControl', {
       }
     );
   },
+
   '.edit-server-url click'() {
-      Navigator.openPage('server');
-  }
+    Navigator.openPage('server');
+  },
 });
