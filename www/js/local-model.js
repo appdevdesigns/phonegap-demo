@@ -9,9 +9,10 @@ import 'can/map/define';
 import Chance from 'chance';
 const chance = new Chance();
 
+import Model from './model';
 import db from './db';
 
-export default can.Model.extend('LocalModel', {
+export default Model.extend('LocalModel', {
   extend(name, staticProps, protoProps) {
     // Ignore the isSaved property when serializing
     can.extend(true, protoProps, {

@@ -1,11 +1,11 @@
 'use strict';
 
 import $ from 'jquery';
-import can from 'can';
+import Model from './model';
 
 const server = 'http://173.16.6.59:1337';
 
-export default can.Model.extend('RemoteModel', {
+export default Model.extend('RemoteModel', {
   install() {
     // Remote models need no installation, so simply return a resolved promise
     return Promise.resolve();
