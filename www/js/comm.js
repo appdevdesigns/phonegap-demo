@@ -17,9 +17,6 @@ const Comm = {
     const ajaxOptions = {
       url: `${server}/${url}`,
       method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
       data: params,
     };
 
