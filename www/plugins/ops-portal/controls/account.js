@@ -9,6 +9,7 @@ import Page from 'core/controls/page';
 
 export default Page.extend('AccountControl', {
   pageId: 'account',
+  parentId: 'landing',
   template: 'plugins/ops-portal/templates/account.html',
 },
   {
@@ -145,5 +146,13 @@ export default Page.extend('AccountControl', {
 
     '.back click'() {
       Navigator.openParentPage();
-    }
+    },
+
+    '.period click'(element) {
+      const periodId = $(element).data('id');
+      Navigator.openPage('period-income-expenses', {
+        periodId: periodId,
+      });
+    },
+
   });

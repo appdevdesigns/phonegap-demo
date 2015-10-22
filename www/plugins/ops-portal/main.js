@@ -9,11 +9,13 @@ import Donors from './controls/donors';
 import Donor from './controls/donor';
 import Server from './controls/server';
 import EditDonor from './controls/edit-donor';
+import PeriodIncomeExpenses from './controls/period-income-expenses';
 
 // Load models
 import DonationsModel from './models/donations';
 import DonorModel from './models/donor';
 import AccountModel from './models/account';
+import TransactionModel from './models/transaction';
 
 const plugin = {
   // Initialize the plugin
@@ -22,8 +24,8 @@ const plugin = {
     Navigator.activate('landing');
   },
 
-  controls: { Landing, Account, Donors, Donor, Server, EditDonor },
-  models: { DonorModel, AccountModel, DonationsModel },
+  controls: { Landing, Account, Donors, Donor, Server, EditDonor, PeriodIncomeExpenses },
+  models: { DonorModel, AccountModel, DonationsModel, TransactionModel },
 
 };
 
