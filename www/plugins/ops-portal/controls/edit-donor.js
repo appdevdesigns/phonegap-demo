@@ -39,7 +39,7 @@ export default Page.extend('DonorEdit', {
           .then(() => {
               Navigator.openPage('donor', {donorId: donor.id});
               })
-        .fail(function(){
+        .fail(() => {
         this.setError('Save failed. Please try again.');
       });
     
