@@ -32,13 +32,14 @@ export default Page.extend('AuthenticateControl', {
   },
   
   validateLogin:function () {
-    this.scope.attr('status', 'validating');
+    
     var userID = this.scope.attr('username');
     var password = this.scope.attr('password');
-    console.log('userID:'+userID);
-    console.log('pwd:'+password);
 
     if ( userID && password) {
+
+      this.scope.attr('status', 'validating');
+
       Authentication.login( userID, password)
       .fail((err, textStatus, errorThrown) =>{
         console.log(err);
