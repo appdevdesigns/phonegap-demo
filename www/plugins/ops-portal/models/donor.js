@@ -28,19 +28,19 @@ export default RemoteModel.extend('DonorModel', {
   defaults: {
     donors_firstName: '',
     donors_lastName: '',
-    donors_spouseFirstName: null,
-    donors_spouseLastName: null,
-    donors_postalCode: null,
-    donors_province: null,
-    donors_address: null,
-    donors_country: null,
-    donors_city: null,
-    donors_homePhone: null,
-    donors_email: null,
-    donors_cellPhone: null,
-    donors_type: null,
-    donors_nationality: null,
-    donors_chineseName: null
+    donors_spouseFirstName: '',
+    donors_spouseLastName: '',
+    donors_postalCode: '',
+    donors_province: '',
+    donors_address: '',
+    donors_country: '',
+    donors_city: '',
+    donors_homePhone: '',
+    donors_email: '',
+    donors_cellPhone: '',
+    donors_type: '',
+    donors_nationality: '',
+    donors_chineseName: ''
   },
 }, {
   name: can.compute(function() {
