@@ -1,0 +1,22 @@
+<div data-role="header">
+  <h3>Log In</h3>
+</div>
+<div role="main" class="ui-content">
+  <form>
+    <label for="username">Username:</label>
+    <input type="text" id="username" can-value="username" autofocus>
+    <label for="password">Password:</label>
+    <input type="password" id="password" can-value="password" autofocus>
+    <button type="submit" class="ui-btn ui-corner-all create">Submit</button>
+  </form>
+    <button class="ui-btn ui-corner-all back" type="button">Back</button>
+  {{#validating}}
+    <p><i class="fa fa-spinner fa-spin" style="color:grey;"></i> Validating...</p>
+  {{/validating}}
+  {{#pass}}
+    <p><i class="fa fa-circle" style="color:green;"></i> Successful log in!</p>
+  {{/pass}}
+  {{#fail}}
+    <p><i class="fa fa-circle" style="color:red;"></i> Your log in attempt failed.</p>
+  {{/fail}}
+</div>

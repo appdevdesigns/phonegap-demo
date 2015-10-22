@@ -35,7 +35,7 @@ export default Page.extend('ServerControl', {
 
       setTimeout(() => {
         Navigator.openPage('landing')
-      }, 5000);
+      }, 2000);
     }).fail(err => {
       console.log(err);
 
