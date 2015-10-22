@@ -6,7 +6,7 @@ import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Config from 'core/config';
 
-const defaultServer = 'http://173.16.6.59:1337';
+const defaultServer = 'http://173.16.6.60:1337';
 
 export default Page.extend('ServerControl', {
   pageId: 'server',
@@ -17,6 +17,8 @@ export default Page.extend('ServerControl', {
     // Call the Page constructor
     this._super(...arguments);
 
+    this.scope.attr('mustConnect', !Config.getServer());
+    
     // Initialize the control scope and render it
     this.scope.attr('server', Config.getServer() || defaultServer);
     ['validating', 'good', 'noResponse', 'badResponse'].forEach(state => {
@@ -34,8 +36,9 @@ export default Page.extend('ServerControl', {
       this.scope.attr('status', 'good');
 
       setTimeout(() => {
-        Navigator.openPage('landing')
-      }, 5000);
+        this.scope.attr('mustConnect', false);
+        Navigator.openPage('landing');
+      }, 2000);
     }).fail(err => {
       console.log(err);
 

@@ -21,13 +21,16 @@ $ bower install
 # Prepare for running (installs Cordova platforms and plugins)
 $ cordova prepare
 
-# Run in iOS or Android simulator
-$ cordova run ios --emulator
-$ cordova run android --emulator
+# Test/Run in Android 
 
-# Run on iOS or Android device
-$ cordova run ios --device
+$ cordova run android --emulator
 $ cordova run android --device
+
+# Test/Run on iOS 
+$ npm install ios-sim --save
+$ cordova run ios --emulator
+$ cordova run ios --device
+
 ```
 
 During development:

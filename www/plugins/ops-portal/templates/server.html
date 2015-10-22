@@ -1,11 +1,12 @@
 <div data-role="header">
+  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline back" {{#mustConnect}} disabled {{/mustConnect}}>Back</button>
   <h3>Server</h3>
 </div>
 <div role="main" class="ui-content">
   <form>
     <label for="server-url">Server URL:</label>
     <input type="text" id="server-url" can-value="server" autofocus>
-    <button type="submit" class="ui-btn ui-corner-all create">Submit</button>
+    <button type="submit" class="ui-btn ui-corner-all submit" {{#validating}} disabled {{/validating}}>Submit</button>
   </form>
   {{#validating}}
     <p><i class="fa fa-spinner fa-spin" style="color:grey;"></i> Validating...</p>
@@ -19,5 +20,4 @@
   {{#badResponse}}
     <p><i class="fa fa-circle" style="color:yellow;"></i> It doesn't look like this server accepts our mobile app. <br />Ask your administrator for the proper server.</p>
   {{/badResponse}}
-  <button class="ui-btn ui-corner-all back" type="button">Back</button>
 </div>
