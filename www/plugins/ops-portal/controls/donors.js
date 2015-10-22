@@ -13,16 +13,23 @@ export default Page.extend('Donors', {
     // Call the Page constructor
     this._super(...arguments);
 
+    //Get Donor list from Server
+    this.scope.attr('donors', Donor.list);
+    
+    const donors= this.donors = Donor.list;
+    
     // Initialize the control scope and render it
     this.render();
-      
-    Donor.findAll()
-    .fail(function(err){
-        console.log(err);
-    })
-    .then((list) => {
-      this.scope.attr('donors', list);
-    })
+    
+    // Initialize the jQuery Mobile listview component
+    this.$listview = element.find('ul');
+    this.$listview.listview();
+    
+    // Refresh the donors UI list whenever donors are added
+    const refresh = this.proxy('refresh');
+    donors.bind('change', refresh);
+    donors.bind('length', refresh);
+    refresh();
   },
   
   '.back click'() {
@@ -41,5 +48,13 @@ export default Page.extend('Donors', {
       donorId: donorId,
     });   
   },
-  
+   
+  /*
+   * Update the jQuery Mobile listview element.
+   *
+   * This must be called to update the UI whenever items are added to the listview.
+   */
+  refresh() {
+    this.$listview.listview('refresh');
+  },
 });

@@ -5,44 +5,59 @@
 </div>
 
 <div data-role="main" class="ui-content">
-    <label for="fname">First name:</label>
+  <form id="donor-edit">
+    <!--Name -->
+    <label for="fname">Name:</label>
     <div class="ui-grid-a">
-        <div class="ui-block-a padAll2">
-                <input type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_firstName}}">
+      <!--First-->  
+      <div class="ui-block-a padAll2">
+                <input type="text" data-inline="true" name="donors_firstName" id="textinput-fc" value="{{donor.donors_firstName}}">
         </div>
+      <!--Last-->
         <div class="ui-block-b padAll2">
-                <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_lastName}}">
+                <input  type="text" data-inline="true" name="donors_lastName" id="textinput-fc" value="{{donor.donors_lastName}}">
         </div>
     </div>
-
+    <!-- Chinese Name -->
     <label for="fname">Nickname:</label>
-    <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="">
-
+    <input  type="text" data-inline="true" name="donors_chineseName" id="textinput-fc" value="{{donor.donors_chineseName}}">
+    
+    <!--Phone-->
     <div class="ui-grid-a">
         <div class="ui-block-a padAll2">
                 <label for="fname">Phone</label>
-                <input type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_homePhone}}">
+                <input type="text" data-inline="true" name="donors_cellPhone" id="textinput-fc" value="{{donor.donors_homePhone}}">
         </div>
+    <!--Email-->
         <div class="ui-block-b padAll2">
                 <label for="fname">Email</label>
-                <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="{{donor.donors_email}}">
+                
+                <input  type="text" data-inline="true" name="donors_email" id="textinput-fc" value="{{donor.donors_email}}">
         </div> 
     </div>
+    <!--Pledge-->
     <div class="ui-content corner-all ui-shadow mrgnbot20">
         <label for="fname">Giving</label>
         <div class="ui-grid-a">
             <div class="ui-block-a padAll2">
-
-                    <input type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="" placeholder="Amount">
+              <!--Amount-->
+                    <input type="text" data-inline="true" name="donors_spouseFirstName" id="textinput-fc" value="" placeholder="Amount">
             </div>
             <div class="ui-block-b padAll2">
-
-                    <input  type="text" data-inline="true" name="textinput-fc" id="textinput-fc" value="" placeholder="Value">
+              <!--Type (Monthly/One-time)-->
+                <select form="donor-edit" data-inline="true" name="donors_type" id="donors_type" can-value="{{donors_type}}">
+                  <option value="monthly" >Monthly</option>
+                  <option value="one-time">One-Time</option>  
+                </select>
             </div>
         </div>	
     </div>
+    <!--Additional Information-->
     <label for="info">Additional Information:</label>
-    <textarea name="addinfo" id="info"></textarea>
+    <textarea name="donors_cellPhone" id="info"></textarea>
+    <p>{{error}}</p>
+    <button class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save">Save</button>
+  </form>
 </div>
-<button class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right">Save</button
+
 

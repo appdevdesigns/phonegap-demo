@@ -5,3 +5,4 @@ node_modules/
 # Ignore PhoneGap build directories in the root directory
 /platforms/
 /plugins/
+www/.brackets.json

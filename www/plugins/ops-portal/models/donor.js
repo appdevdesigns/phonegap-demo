@@ -4,11 +4,11 @@ import can from 'can';
 import RemoteModel from 'core/remote-model';
 
 export default RemoteModel.extend('DonorModel', {
-  id: 'donor_id',
+  id: 'id',
 //  hasUuid: true,
   url: 'opstool-donations/donor',
   attributes: {
-    donor_id: 'string|primarykey|unique',
+    id: 'string|primarykey|unique',
     donors_firstName: 'string',
     donors_lastName: 'string',
     donors_spouseFirstName: 'string',
