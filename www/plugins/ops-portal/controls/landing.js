@@ -101,9 +101,8 @@ export default Page.extend('LandingControl', {
   '.donors click'() {
       Navigator.openPage('donors');
   },
-
+  
   '.edit-server-url click'() {
-      Navigator.openPage('server');
-  }
-
+    Navigator.openPage('server');
+  },
 });

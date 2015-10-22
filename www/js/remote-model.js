@@ -1,60 +1,56 @@
 'use strict';
 
-import $ from 'jquery';
-import can from 'can';
+import Model from './model';
+import Comm from './comm';
 
-const server = 'http://173.16.6.60:1337';
-
-export default can.Model.extend('RemoteModel', {
+export default Model.extend('RemoteModel', {
   install() {
     // Remote models need no installation, so simply return a resolved promise
     return Promise.resolve();
   },
 
-  request({ url, method = 'GET', params }) {
-    return $.ajax({
-      url: `${server}/${this.url}${url}`,
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  request(options) {
+    options.url = this.url + options.url;
+    return Comm.request(options);
   },
 
-  findAll(params, success, error) {
+  findAll(params) {
     return this.request({
       url: '',
       params,
-    }).done(success).fail(error);
+    });
   },
 
-  findOne(params, success, error) {
+  findOne(params) {
     const id = params[this.id];
     return this.request({
       url: `/${id}`,
-    }).then(model => model || null).done(success).fail(error);
+    }).then(model => model || null);
   },
 
-  create(params, success, error) {
+  create(params) {
     return this.request({
       url: '',
       method: 'POST',
       params,
-    }).done(success).fail(error);
+      retryFailures: true,
+    });
   },
 
-  update(id, params, success, error) {
+  update(id, params) {
     return this.request({
       url: `/${id}`,
       method: 'PUT',
       params,
-    }).then(model => model || null).done(success).fail(error);
+      retryFailures: true,
+    }).then(model => model || null);
   },
 
-  destroy(id, params, success, error) {
+  destroy(id, params) {
     return this.request({
       url: `/${id}`,
       method: 'DELETE',
-    }).done(success).fail(error);
+      retryFailures: true,
+    });
   },
 }, {});
