@@ -2,6 +2,7 @@
 
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
+import Authentication from 'core/authentication';
 
 var serverURL = 'http://173.16.6.59:1337'
 export default Page.extend('AuthenticateControl', {
@@ -31,18 +32,9 @@ export default Page.extend('AuthenticateControl', {
   
   validateLogin:function () {
     this.scope.attr('status', 'validating');
-//    $.ajax({url:serverURL+'/csrfToken'})
-//      .then((data) => {
-//        var csrf = data._csrf;
-        $.ajax({
-        url:serverURL+'/mobile/policy' //'/site/login', 
-//        method: 'GET', 
-//        data: {
-//          _csrf: csrf,
-//          username: this.scope.attr('username'), 
-//          password: this.scope.attr('password')
-//        }
-      })
+      Authentication.login(
+        this.scope.attr('username'), 
+        this.scope.attr('password'))
       .fail((err, textStatus, errorThrown) =>{
         console.log(err);
         // if status not found or failed login

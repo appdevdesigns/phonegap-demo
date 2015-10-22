@@ -6,7 +6,7 @@ import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Config from 'core/config';
 
-const defaultServer = 'http://173.16.6.59:1337';
+const defaultServer = 'http://173.16.6.60:1337';
 
 export default Page.extend('ServerControl', {
   pageId: 'server',

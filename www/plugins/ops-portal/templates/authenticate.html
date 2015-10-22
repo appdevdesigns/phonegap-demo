@@ -7,7 +7,7 @@
     <input type="text" id="username" can-value="username" autofocus>
     <label for="password">Password:</label>
     <input type="password" id="password" can-value="password" autofocus>
-    <button type="submit" class="ui-btn ui-corner-all create">Submit</button>
+    <button type="submit" class="ui-btn ui-corner-all create" {{#validating}} disabled {{/validating}}>Submit</button>
   </form>
     <button class="ui-btn ui-corner-all back" type="button">Back</button>
   {{#validating}}
