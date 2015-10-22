@@ -20,27 +20,17 @@
 					</tr>
 				</thead>
 				<tbody>
+					{{#each incomeCategoryTotals}}
 					<tr>
-						<td>Foreign contrib</td>
-						<td>8000</td>
+						<td>{{0}}</td>
+						<td>{{1}}</td>
 					</tr>
-					<tr>
-						<td>Local contrib</td>
-						<td>12000</td>
-					</tr>
-					<tr>
-						<td>Transfers in</td>
-						<td>3000</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
+					{{/each}}
 				</tbody>
 			</table>
 		</div>
 		<div data-role="collapsible">
-			<h1><span>Expense total:</span> <span class="v1">{{expensesTotal}}</span></h1>
+			<h1><span>Expenses total:</span> <span class="v1">{{expensesTotal}}</span></h1>
 			<table data-role="table" class="ui-responsive defeault">
 				<thead>
 					<tr>
@@ -49,26 +39,12 @@
 					</tr>
 				</thead>
 				<tbody>
+					{{#each expenseCategoryTotals}}
 					<tr>
-						<td>Foreign contrib</td>
-						<td>8000</td>
+						<td>{{0}}</td>
+						<td>{{1}}</td>
 					</tr>
-					<tr>
-						<td>Gross Salary</td>
-						<td>8000</td>
-					</tr>
-					<tr>
-						<td>Salary Advance</td>
-						<td>12000</td>
-					</tr>
-					<tr>
-						<td>Reimbursment</td>
-						<td>3000</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
+					{{/each}}
 				</tbody>
 			</table>
 		</div>

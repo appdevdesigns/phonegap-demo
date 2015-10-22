@@ -1,0 +1,27 @@
+<div data-role="header">
+		<a data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline back">Back</a>
+		<h1>{{donor.name}}</h1>
+</div>
+<div data-role="main" class="ui-content">
+	<form>
+        <!--Date-->
+		<div class="ui-field-contain">
+			<label for="name">Date:</label>
+            <input type="text" name ="donItem_dateReceived" data-role="date" value="{{date}}">
+		</div>
+        <!--Amount-->
+		<div class="ui-field-contain">
+			<label for="name">Amount:</label>
+			<input type="text" name="donItem_amount" id="name" value="{{donor.donors_spouseFirstName}}">	
+		</div>
+        <!--Type (one-time/monthly)-->
+		<div class="ui-field-contain">
+			<label for="name">Type:</label>
+			<input type="text" name="donItem_type" id="name" value="{{donor.donors_type}}">	
+		</div>
+        <!--Description
+		<label for="info">Description:</label>
+		<textarea name="addinfo" id="info"></textarea>-->
+	</form>
+	<button class="mrgntop50 ui-btn ui-shadow ui-corner-all add">Add</button>
+</div>

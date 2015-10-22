@@ -49,6 +49,13 @@ export default Page.extend('Donor', {
 	  const donorId = this.scope.donor.id;
       Navigator.openPage('edit-donor', { editDonorId: donorId });  
   },
+  
+  '.add-donation click'(){
+      const donorId = this.scope.donor.id;
+      Navigator.openPage('add-donation', { 
+         addDonorId: donorId 
+      });  
+  },
     
   setDonor(donor) {
       this.scope.attr('donor', donor);

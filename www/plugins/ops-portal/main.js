@@ -12,6 +12,7 @@ import Server from './controls/server';
 import EditDonor from './controls/edit-donor';
 import PeriodIncomeExpenses from './controls/period-income-expenses';
 import Authenticate from './controls/authenticate';
+import AddDonation from './controls/add-donation';
 
 // Load models
 import DonationsModel from './models/donations';
@@ -31,7 +32,7 @@ const plugin = {
     }
   },
 
-  controls: { Landing, Account, Donors, Donor, Server, EditDonor, PeriodIncomeExpenses, Authenticate },
+  controls: { Landing, Account, Donors, Donor, Server, EditDonor, PeriodIncomeExpenses, Authenticate, AddDonation },
   models: { DonorModel, AccountModel, DonationsModel, TransactionModel },
 
 };
