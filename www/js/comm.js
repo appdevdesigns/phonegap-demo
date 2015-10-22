@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 
+import Config from './config';
 import HTTPRequest from './models/httpRequest';
 import Navigator from './navigator';
 import Authentication from './authentication';
@@ -27,7 +28,7 @@ const CSRF = {
         var dfd = $.Deferred();
         $.ajax({
             type: 'GET',
-            url: `${Comm.server}/csrfToken`,
+            url: `${Config.getServer()}/csrfToken`,
             dataType: 'json',
             cache: false
         })
@@ -57,21 +58,9 @@ const Comm = {
     var dfd = $.Deferred();
 
     const { url, method, params, retryFailures } = options;
-    
-    if (Comm.server == null) {
-
-        // Pull the server URL from the configuration
-        const serverURL = window.localStorage.getItem('serverURL');
-
-        // Parse the URL to extract only the protocol, host
-        const parser = document.createElement('a');
-        parser.href = serverURL;
-        Comm.server = `${parser.protocol}//${parser.host}`;
-    }
-
 
     const ajaxOptions = {
-      url: `${Comm.server}/${url}`,
+      url: `${Config.getServer()}/${url}`,
       method,
       data: params,
     };
