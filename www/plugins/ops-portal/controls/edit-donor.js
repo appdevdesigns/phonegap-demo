@@ -26,17 +26,38 @@ export default Page.extend('DonorEdit', {
   },
   
   '.back click'() {
-      Navigator.openParentPage();
+      window.history.back();
   },
   
-  //TO DO: Implement Save Button
+  '.save click' () {
+      var donor = this.scope.attr('donor');
+      var values = this.element.find('form').serializeArray();
+      values.forEach( function (value){
+          donor.attr(value.name, value.value);
+      });
+      donor.save()
+          .then(() => {
+              Navigator.openPage('donor', {donorId: donor.id});
+              })
+        .fail(function(){
+        this.setError('Save failed. Please try again.');
+      });
+    
+    // Prevent default submit behavior
+    return false;
+  },
   //TO DO: Add donations type select
+  
+  setError(error){
+    this.scope.attr('error', error);
+  },
   
   setDonor(donor){
       this.scope.attr('donor', donor);
   },
   
   routeChange (event, editDonorId) {
+      this.setError('');
       let donor = null;
       if (editDonorId === 'new') {
       // Create a new donor to edit
@@ -56,5 +77,5 @@ export default Page.extend('DonorEdit', {
       }
       this.setDonor(donor);
   },
-
+  
 });
