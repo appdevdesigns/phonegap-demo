@@ -5,6 +5,7 @@ import can from 'can';
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Config from 'core/config';
+import Comm from 'core/comm';
 
 const defaultServer = 'http://173.16.6.60:1337';
 
@@ -34,6 +35,9 @@ export default Page.extend('ServerControl', {
     Config.loadConfig(serverURL).then(() => {
       // The configuration loaded sucessfully
       this.scope.attr('status', 'good');
+
+      // reset the Comm obj so it recalculates the server url
+      Comm.server = null;  
 
       setTimeout(() => {
         this.scope.attr('mustConnect', false);
