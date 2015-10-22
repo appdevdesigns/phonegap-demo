@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import can from 'can';
 
-const server = 'http://173.16.6.59:1337';
+const server = 'http://173.16.6.60:1337';
 
 export default can.Model.extend('RemoteModel', {
   install() {
