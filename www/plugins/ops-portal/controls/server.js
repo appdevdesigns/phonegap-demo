@@ -17,6 +17,8 @@ export default Page.extend('ServerControl', {
     // Call the Page constructor
     this._super(...arguments);
 
+    this.scope.attr('mustConnect', !Config.getServer());
+    
     // Initialize the control scope and render it
     this.scope.attr('server', Config.getServer() || defaultServer);
     ['validating', 'good', 'noResponse', 'badResponse'].forEach(state => {
@@ -34,7 +36,8 @@ export default Page.extend('ServerControl', {
       this.scope.attr('status', 'good');
 
       setTimeout(() => {
-        Navigator.openPage('landing')
+        this.scope.attr('mustConnect', false);
+        Navigator.openPage('landing');
       }, 2000);
     }).fail(err => {
       console.log(err);

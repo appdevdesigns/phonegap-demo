@@ -3,6 +3,7 @@
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Authentication from 'core/authentication';
+import Config from 'core/config';
 
 var serverURL = 'http://173.16.6.59:1337'
 export default Page.extend('AuthenticateControl', {
@@ -59,6 +60,10 @@ export default Page.extend('AuthenticateControl', {
       return false;
   },  
   '.back click'() {
-      Navigator.openPage('server');
+      if (Config.getServer()) {
+          Navigator.openPage('landing');
+      } else {
+          Navigator.openPage('server');
+      }
   }
 });
