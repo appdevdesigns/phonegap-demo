@@ -73,7 +73,7 @@ const Database = {
       const values = [];
       const conditions = [];
       can.each(query || {}, (value, key) => {
-        values.push(value);
+        values.push(value === null ? null : value.toString());
         conditions.push(`"${key}"=?`);
       });
 
@@ -103,7 +103,7 @@ const Database = {
           return;
         }
 
-        values.push(value);
+        values.push(value === null ? null : value.toString());
         fields.push(`"${key}"`);
         placeholders.push('?');
       });
@@ -122,11 +122,12 @@ const Database = {
       const values = [];
       const assignments = [];
       can.each(tableData.attributes, (type, key) => {
-        values.push(attrs[key]);
+        const value = attrs[key];
+        values.push(value === null ? null : value.toString());
         assignments.push(`"${key}"=?`);
       });
 
-      values.push(id);
+      values.push(id === null ? null : id.toString());
       const assignmentsClause = assignments.join(', ');
       tx.executeSql(`UPDATE "${tableData.name}" SET ${assignmentsClause} WHERE ${tableData.primaryKey}=?`, values, (tx, result) => {
         deferred.resolve(null);
@@ -138,7 +139,7 @@ const Database = {
   destroy(tableData, id) {
     const deferred = can.Deferred();
     this.transaction(tx => {
-      tx.executeSql(`DELETE FROM "${tableData.name}" WHERE "${tableData.primaryKey}"=?`, [id], (tx, result) => {
+      tx.executeSql(`DELETE FROM "${tableData.name}" WHERE "${tableData.primaryKey}"=?`, [id === null ? null : id.toString()], (tx, result) => {
         deferred.resolve(null);
       }, deferred.reject);
     }, deferred.reject);
