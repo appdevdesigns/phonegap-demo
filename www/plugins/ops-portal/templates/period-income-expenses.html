@@ -1,22 +1,22 @@
 <div data-role="header">
-	<div class="ui-nodisc-icon"><a class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext ui-btn-b ui-btn-inline back" data-role="button">back</a></div>
+	<div class="ui-nodisc-icon"><button class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext ui-btn-b ui-btn-inline back" data-role="button">back</button></div>
 </div>
 <div data-role="main" class="ui-content">
 	<div class="ui-grid-b">
 		<div class="ui-block-a"><a href="#anylink" class="ui-btn ui-shadow ui-corner-all">Prev</a></div>
 		<div class="ui-block-b">
-			<h1 class="center">Dec 2015</h1></div>
+			<h1 class="center">{{periodDate}}</h1></div>
 		<div class="ui-block-c"><a href="#anylink" class="ui-btn ui-shadow ui-corner-all">Next</a></div>
 	</div>
 	<div>
-		<p>previous balance:<span class="prevbal">10000</span></p>
+		<p>previous balance:<span class="prevbal">{{previousBalance}}</span></p>
 		<div data-role="collapsible">
-			<h1><span>Income total:</span> <span class="v1">10000</span></h1>
+			<h1><span>Income total:</span> <span class="v1">{{incomeTotal}}</span></h1>
 			<table data-role="table" class="ui-responsive defeault">
 				<thead>
 					<tr>
-						<th>(Description)</th>
-						<th>(ammount)</th>
+						<th>Category</th>
+						<th>Amount</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,12 +40,12 @@
 			</table>
 		</div>
 		<div data-role="collapsible">
-			<h1><span>Expense total:</span> <span class="v1">10000</span></h1>
+			<h1><span>Expense total:</span> <span class="v1">{{expensesTotal}}</span></h1>
 			<table data-role="table" class="ui-responsive defeault">
 				<thead>
 					<tr>
-						<th>(Description)</th>
-						<th>(ammount)</th>
+						<th>Category</th>
+						<th>Amount</th>
 					</tr>
 				</thead>
 				<tbody>

@@ -6,17 +6,15 @@ export default RemoteModel.extend('AccountModel', {
 	id: 'id',
 	url: 'opstool-account/account/period',
 	attributes: {
-		id: 'int|primarykey|autoincrement|unique',
+		id: 'string',
 		date: 'string', // starting date of period
 		beginningBalance: 'real',
 		income: 'real',
 		expenses: 'real',
 		closed: 'int' // 0 = open, 1 = closed
 	},
-	dbAttributes: {
-		id: 'int|primarykey|autoincrement|unique',
-	},
 	defaults: {
+		id: '',
 		date: '',
 		beginningBalance: 0,
 		income: 0,

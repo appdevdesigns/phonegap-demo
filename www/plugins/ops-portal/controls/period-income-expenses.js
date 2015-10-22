@@ -43,20 +43,35 @@ export default Page.extend('PeriodIncomeExpenses', {
                 .then((list) => {
                     // TODO: remove this when findAll() actually filters by periodId
                     var filteredList = this.filterByPeriod(list, periodId);
-                    this.scope.attr('transactions', filteredList);
+                    var period = Account.store[periodId];
+                    this.calculateTotals(period, filteredList);
                 });
-
         },
 
-        // TODO: remove this when findAll() filters by period id
+        calculateTotals(period, transactions) {
+            var totalIncome = 0;
+            var totalExpenses = 0;
+            transactions.forEach(function(item) {
+                totalIncome += item.credit;
+                totalExpenses += item.debit;
+            });
+
+            // Add values to scope
+            this.scope.attr('periodDate', period.date);
+            this.scope.attr('previousBalance', period.beginningBalance);
+            this.scope.attr('totalIncome', totalIncome);
+            this.scope.attr('totalExpenses', totalExpenses);
+
+        },
+        //TODO: remove this when findAll() filters by period id
         filterByPeriod(list, periodId) {
             var filteredList = [];
-            list.forEach(function(item){
-                if ( item.period_id == periodId ) {
+            list.forEach(function (item) {
+                if (item.period == periodId) {
                     filteredList.push(item);
                 }
             })
             return filteredList;
         }
-        
+
     });
