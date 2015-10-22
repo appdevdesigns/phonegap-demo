@@ -49,18 +49,39 @@ export default Page.extend('PeriodIncomeExpenses', {
         },
 
         calculateTotals(period, transactions) {
-            var totalIncome = 0;
-            var totalExpenses = 0;
-            transactions.forEach(function(item) {
-                totalIncome += item.credit;
-                totalExpenses += item.debit;
+            let incomeTotal = 0;
+            let expensesTotal = 0;
+            let incomeCategoryTotals = new Map();
+            let expenseCategoryTotals = new Map();
+
+            transactions.forEach(function (item) {
+                if (0 < item.credit) {
+                    incomeTotal += item.credit;
+                    if ( incomeCategoryTotals.has(item.category) ) {
+                        incomeCategoryTotals.set(item.category, incomeCategoryTotals.get(item.category) + item.credit);
+                    }
+                    else {
+                        incomeCategoryTotals.set(item.category, item.credit);
+                    }
+                 }
+                else { // expense
+                    expensesTotal += item.debit;
+                    if ( expenseCategoryTotals.has(item.category) ) {
+                        expenseCategoryTotals.set(item.category, expenseCategoryTotals.get(item.category) + item.debit);
+                    }
+                    else {
+                        expenseCategoryTotals.set(item.category, item.debit);
+                    }
+                }
             });
 
             // Add values to scope
             this.scope.attr('periodDate', period.date);
             this.scope.attr('previousBalance', period.beginningBalance);
-            this.scope.attr('totalIncome', totalIncome);
-            this.scope.attr('totalExpenses', totalExpenses);
+            this.scope.attr('incomeTotal', incomeTotal);
+            this.scope.attr('expensesTotal', expensesTotal);
+            this.scope.attr('incomeCategoryTotals', [...incomeCategoryTotals.entries()]);
+            this.scope.attr('expenseCategoryTotals', [...expenseCategoryTotals.entries()]);
 
         },
         //TODO: remove this when findAll() filters by period id
