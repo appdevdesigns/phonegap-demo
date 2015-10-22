@@ -7,21 +7,25 @@ import Config from './config';
 const Authentication = {
   login: function (username, password) {
     var serverURL = Config.getServer();
-//  $.ajax({url:serverURL+'/csrfToken'})
-//    .then((data) => {
-//      var csrf = data._csrf;
+    return $.ajax({url:serverURL+'/csrfToken'})
+    .then((data) => {
+      var csrf = data._csrf;
       return $.ajax({
-       url:serverURL+'/mobile/policy' //'/site/login', 
-//      method: 'GET', 
-//      data: {
-//       _csrf: csrf,
-//       username: this.scope.attr('username'), 
-//       password: this.scope.attr('password')
-//     }
-    })
-    .then((value) => {
-      this.dispatch('loggedIn');
-      return value;
+        url:serverURL+'/site/login', 
+        method: 'POST', 
+        data: {
+          _csrf: csrf,
+          username: username, 
+          password: password
+        }
+      })
+      .then((value) => {
+        this.dispatch('loggedIn');
+        return value;
+      })
+      .fail((err) => {
+        console.log('Yikes!', err);
+      })
     })
   }
 }

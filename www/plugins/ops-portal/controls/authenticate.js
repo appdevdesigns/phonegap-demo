@@ -33,23 +33,27 @@ export default Page.extend('AuthenticateControl', {
   
   validateLogin:function () {
     this.scope.attr('status', 'validating');
-      Authentication.login(
-        this.scope.attr('username'), 
-        this.scope.attr('password'))
+    var userID = this.scope.attr('username');
+    var password = this.scope.attr('password');
+    console.log('userID:'+userID);
+    console.log('pwd:'+password);
+
+    if ( userID && password) {
+      Authentication.login( userID, password)
       .fail((err, textStatus, errorThrown) =>{
         console.log(err);
         // if status not found or failed login
         this.scope.attr('status', 'fail');
       })
       .then((data) => {
+
         // Do something with data
-        if (this.scope.attr('username')==='admin' && this.scope.attr('password')==='admin') {
-          this.scope.attr('status', 'pass');
-          setTimeout(function() { Navigator.openPage('landing') }, 2000);
-        } else {
-          this.scope.attr('status', 'fail');
-        }
+        this.scope.attr('status', 'pass');
+        setTimeout(function() { Navigator.openPage('landing') }, 2000);
+
       });
+
+    }
       //});
 
   },
