@@ -30,7 +30,7 @@ const Comm = {
     // Convert the "thenable" returned by jQuery's ajax method to a normal Promise instance
     return Promise.resolve($.ajax(ajaxOptions)).catch(err => {
       // Send to login page in case of 401
-      if (err.status === 401) {
+      if (err.status === 401 || err.status === 403) {
         Navigator.openPage('login');
         pendingAuthentication.push(options);
       } else if (retryFailures) {
