@@ -4,6 +4,7 @@ import highchartsModule from 'highcharts';
 const { Highcharts } = highchartsModule;
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
+import Config from 'core/config';
 
 export default Page.extend('LandingControl', {
   pageId: 'landing',
@@ -15,11 +16,40 @@ export default Page.extend('LandingControl', {
     this._super(...arguments);
 
     // Initialize the control scope and render it
+    this.checkServer();
+    setInterval(() => {
+      //Every X seconds
+      this.checkServer();
+    }, 20000);
+    Config.on('serverChanged', (newURL) => {
+        this.scope.attr('serverErr', false);
+    });
+    
     this.render();
 
     this.initializeHighcharts();
   },
-
+  
+  checkServer() {
+    var currentServer = Config.getServer();
+    if (currentServer) {
+      Config.loadConfig(currentServer).then(() => {
+        //Success, no need to warn anyone
+        //console.log('Server good');
+        this.scope.attr('serverErr', false);
+      })
+      .fail(err => {
+        //Failed, warn the user
+        //console.log('Could not connect to '+currentServer+'. Check the IP and your VPN.');
+        this.scope.attr('serverErr', true);
+        //alert('Warning: Unable to connect to the server. Is your VPN on?');
+      })
+    } else {
+      //...What?
+      console.log('How did you even get to this page?');
+    }
+  },
+  
   initializeHighcharts() {
     // By default they do not add a comma to our values
     Highcharts.setOptions({

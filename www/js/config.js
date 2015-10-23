@@ -1,8 +1,11 @@
 'use strict';
 
 import $ from 'jquery';
+import can from 'can';
 
 let config = {};
+
+const attrs = can.Map();
 
 const Config = {
   loadConfig(serverURL) {
@@ -17,12 +20,18 @@ const Config = {
   },
 
   getServer() {
-    return window.localStorage.getItem('serverURL');
+    return attrs.attr('serverURL');
   },
 
   setServer(serverURL) {
-    return window.localStorage.setItem('serverURL', serverURL);
+    attrs.attr('serverURL', serverURL);
+    window.localStorage.setItem('serverURL', serverURL);
+    this.dispatch('serverChanged', [serverURL]);
   },
 };
+can.extend(Config, can.event);
+
+// Initialize the server URL with the persisted value stored in local storage
+Config.setServer(window.localStorage.getItem('serverURL'));
 
 export default Config;
