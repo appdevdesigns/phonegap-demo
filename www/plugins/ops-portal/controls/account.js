@@ -15,71 +15,77 @@ export default Page.extend('AccountControl', {
   {
     // Initialize the control
     init(element) {
+      var _this = this;
+
       // Call the Page constructor
       this._super(...arguments);
 
       // Initialize the control scope and render it
       this.render();
 
-      AccountModel.findAll()
-        .fail(function (err) {
-          console.log(err);
-        })
-        .then((list) => {
-          const avePercentRedThreshold = 80
-          const avePercentYellowThreshold = 100
-          const monthsLeftRedThreshold = 1
-          const monthsLeftYellowThreshold = 3
+      this.element.on('pageshow', () => {
 
-          // update bar chart
-          this.updateChart(list);
+        AccountModel.findAll()
+          .fail(function (err) {
+            console.log(err);
+          })
+          .then((list) => {
+            const avePercentRedThreshold = 80
+            const avePercentYellowThreshold = 100
+            const monthsLeftRedThreshold = 1
+            const monthsLeftYellowThreshold = 3
 
-          var numMonths = ((list.length - 1) < 12) ? (list.length() - 1) : 12;
-          var aveIncome = 0; // average income past 12 months
-          var aveExpenses = 0; // average expenses past 12 months
-          var aveDelta = 0; // average difference between income and expenses
-          for (var i = 1; i <= numMonths; ++i) {
-            aveIncome += list[i].income;
-            aveExpenses += list[i].expenses;
-            aveDelta += list[i].income - list[i].expenses;
-          }
-          aveIncome /= numMonths;
-          aveExpenses /= numMonths;
-          aveDelta /= numMonths;
+            // update bar chart
+            this.updateChart(list);
 
-          var avePercent = (aveIncome / aveExpenses) * 100;
+            var numMonths = ((list.length - 1) < 12) ? (list.length() - 1) : 12;
+            var aveIncome = 0; // average income past 12 months
+            var aveExpenses = 0; // average expenses past 12 months
+            var aveDelta = 0; // average difference between income and expenses
+            for (var i = 1; i <= numMonths; ++i) {
+              aveIncome += list[i].income;
+              aveExpenses += list[i].expenses;
+              aveDelta += list[i].income - list[i].expenses;
+            }
+            aveIncome /= numMonths;
+            aveExpenses /= numMonths;
+            aveDelta /= numMonths;
 
-          var avePercentBg = 'green'; // average % background
-          if (avePercent < avePercentRedThreshold) {
-            avePercentBg = 'red';
-          } else if (avePercent < avePercentYellowThreshold) {
-            avePercentBg = 'yellow';
-          }
+            var avePercent = (aveIncome / aveExpenses) * 100;
 
-          var monthsLeftBg = 'green'; // months left background
-          var monthsLeft;
-          if (aveDelta < 0) {
-            monthsLeft = list[0].beginningBalance / -aveDelta;
-            if (monthsLeft < monthsLeftRedThreshold) {
-              monthsLeftBg = 'red';
-            } else if (monthsLeft < monthsLeftYellowThreshold) {
-              monthsLeftBg = 'yellow';
+            var avePercentBg = 'green'; // average % background
+            if (avePercent < avePercentRedThreshold) {
+              avePercentBg = 'red';
+            } else if (avePercent < avePercentYellowThreshold) {
+              avePercentBg = 'yellow';
             }
 
-          }
-          else {
-            monthsLeft = "<i class='fa fa-thumbs-o-up'></i>";
-          }
+            var monthsLeftBg = 'green'; // months left background
+            var monthsLeft;
+            if (aveDelta < 0) {
+              monthsLeft = list[0].beginningBalance / -aveDelta;
+              if (monthsLeft < monthsLeftRedThreshold) {
+                monthsLeftBg = 'red';
+              } else if (monthsLeft < monthsLeftYellowThreshold) {
+                monthsLeftBg = 'yellow';
+              }
 
-          // assign scope variables
-          this.scope.attr('periods', list);
-          this.scope.attr('balance', list[0].beginningBalance - list[0].expenses)
-          this.scope.attr('avePercent', avePercent.toFixed(0) + "%");
-          this.scope.attr('avePercentBg', avePercentBg);
-          this.scope.attr('monthsLeft', monthsLeft);
-          this.scope.attr('monthsLeftBg', monthsLeftBg);
+            }
+            else {
+              monthsLeft = "<i class='fa fa-thumbs-o-up'></i>";
+            }
 
-        })
+            // assign scope variables
+            this.scope.attr('periods', list);
+            this.scope.attr('balance', list[0].beginningBalance - list[0].expenses)
+            this.scope.attr('avePercent', avePercent.toFixed(0) + "%");
+            this.scope.attr('avePercentBg', avePercentBg);
+            this.scope.attr('monthsLeft', monthsLeft);
+            this.scope.attr('monthsLeftBg', monthsLeftBg);
+
+          })
+
+        });
     },
 
     updateChart(list) {

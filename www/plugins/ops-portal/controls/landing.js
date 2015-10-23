@@ -17,7 +17,11 @@ export default Page.extend('LandingControl', {
     // Initialize the control scope and render it
     this.render();
 
-    this.initializeHighcharts();
+    this.element.on('pageshow', () => {
+
+      this.initializeHighcharts();
+    })
+    
   },
 
   initializeHighcharts() {
@@ -29,7 +33,7 @@ export default Page.extend('LandingControl', {
     });
 
     const income = 11365;
-    const expenses = -11086;
+    const expenses = -5100;
     this.element.find('#average').highcharts(
       {
         colors: ['#3D9D50', '#DB1A23', '#000'],
