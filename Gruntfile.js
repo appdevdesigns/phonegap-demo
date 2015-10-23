@@ -113,10 +113,20 @@ module.exports = function(grunt) {
     });
 
     // Listen on the provided port, defaulting to 8000
-    var server = app.listen(port || 8000, function() {
-      var serverPort = server.address().port;
-      grunt.log.ok('Started app browser server running on port %s', serverPort);
+    var httpServer = require('http').createServer(app).listen(port || 8000, function() {
+      var serverPort = httpServer.address().port;
+      grunt.log.ok('Started HTTP server running on port %s', serverPort);
       grunt.log.ok('Run from http://localhost:%s/browser/www/', serverPort);
+    });
+
+    // Listen on the provided port, defaulting to 8443
+    var fs = require('fs');
+    var privateKey = fs.readFileSync('ssl/localhost.key', 'utf8');
+    var certificate = fs.readFileSync('ssl/localhost.crt', 'utf8');
+    var httpsServer = require('https').createServer({ key: privateKey, cert: certificate }, app).listen(port || 8443, function() {
+      var serverPort = httpsServer.address().port;
+      grunt.log.ok('Started HTTPS server running on port %s', serverPort);
+      grunt.log.ok('Run from https://localhost:%s/browser/www/', serverPort);
     });
   });
 
