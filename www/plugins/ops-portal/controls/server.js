@@ -5,7 +5,6 @@ import can from 'can';
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Config from 'core/config';
-import Comm from 'core/comm';
 
 const defaultServer = 'http://173.16.6.60:1337';
 
@@ -19,12 +18,18 @@ export default Page.extend('ServerControl', {
     this._super(...arguments);
 
     this.scope.attr('mustConnect', !Config.getServer());
-    
+
     // Initialize the control scope and render it
     this.scope.attr('server', Config.getServer() || defaultServer);
     ['validating', 'good', 'noResponse', 'badResponse'].forEach(state => {
       this.scope.attr(state, can.compute(() => this.scope.attr('status') === state));
     });
+
+    this.checkServer();
+    setInterval(() => {
+      //Every X seconds
+      this.checkServer();
+    }, 20000);
 
     this.render();
   },
@@ -35,9 +40,7 @@ export default Page.extend('ServerControl', {
     Config.loadConfig(serverURL).then(() => {
       // The configuration loaded sucessfully
       this.scope.attr('status', 'good');
-
-      // reset the Comm obj so it recalculates the server url
-      Comm.server = null;  
+      this.scope.attr('serverErr', false);
 
       setTimeout(() => {
         this.scope.attr('mustConnect', false);
@@ -53,6 +56,24 @@ export default Page.extend('ServerControl', {
         this.scope.attr('status', 'badResponse');
       }
     });
+  },
+
+  checkServer() {
+    var currentServer = Config.getServer();
+    if (currentServer) {
+      Config.loadConfig(currentServer).then(() => {
+        //Success, no need to warn anyone
+        //console.log('Server good');
+        this.scope.attr('serverErr', false);
+      })
+      .fail(err => {
+        //Failed, warn the user
+        //console.log('Could not connect to '+currentServer+'. Check the IP and your VPN.');
+        this.scope.attr('serverErr', true);
+
+        //alert('Warning: Unable to connect to the server. Is your VPN on?');
+      });
+    }
   },
 
   'form submit'() {
