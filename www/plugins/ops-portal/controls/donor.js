@@ -29,17 +29,34 @@ export default Page.extend('Donor', {
     this.render();
     
     // Load donations from server
-    Donations.findAll({ donor_id: can.route.attr('donorId') })
-    .fail(function(err){
-        console.log(err);
-    })
-    .then((list) => {
-        this.scope.attr('donations', list );
-    })
+//    Donations.findAll({ donor_id: can.route.attr('donorId') })
+//    .fail(function(err){
+//        console.log(err);
+//    })
+//    .then((list) => {
+      
+      var tempList = Donations.list;
+      var donationsArray = [];
+      for(var donation in templist){
+    //      if (donation.donor_id ===)
+        donationsArray.push(donation);
+      }
+      var list = donationsArray.sort(function(a,b){
+        if(parseDate(a.donItem_dateReceived) > parseDate(b.donItem_dateReceived)){
+           return 1;
+        }
+        if(parseDate(a.donItem_dateReceived) < parseDate(b.donItem_dateReceived)){
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
     
-
-  },
-  
+      this.scope.attr('donations', tempList);
+        
+    },
+    
   '.back click'() {
       Navigator.openParentPage();
   
@@ -72,6 +89,31 @@ export default Page.extend('Donor', {
       }
       this.setDonor(donor);
   },
-
+  
+  parseDate(dateString){
+        var dateStrings = dateString.split('-');
+        var date = new Date(dateStrings[0], dateStrings[1], dateStrings[2]);
+        return date;
+  },
+  
+  sortByDate(donations){
+    var donationsArray = [];
+    for(var donation in donations){
+//      if (donation.donor_id ===)
+      donationsArray.push(donation);
+    }
+    donationsArray.sort(function(a,b){
+        if(parseDate(a.donItem_dateReceived) > parseDate(b.donItem_dateReceived)){
+           return 1;
+        }
+        if(parseDate(a.donItem_dateReceived) < parseDate(b.donItem_dateReceived)){
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
+    return donationsArray;
+    },
   
 });
