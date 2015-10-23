@@ -27,8 +27,7 @@ export default Page.extend('LandingControl', {
     
     this.render();
 
-    this.element.on('pageshow', () => {
-
+    this.element.one('pageshow', () => {
       this.initializeHighcharts();
     })
     
