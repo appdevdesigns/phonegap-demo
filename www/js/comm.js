@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 
+import Config from './config';
 import HTTPRequest from './models/httpRequest';
 import Navigator from './navigator';
 import Authentication from './authentication';
@@ -17,7 +18,7 @@ const Server = {
  * CSRF object for internal use only.
  */
 const CSRF = {
-    token: null,
+    token: 'null',
     /**
      * Fetch the user's CSRF token from sails.js
      * @return Deferred
@@ -27,7 +28,7 @@ const CSRF = {
         var dfd = $.Deferred();
         $.ajax({
             type: 'GET',
-            url: `${Comm.server}/csrfToken`,
+            url: `${Config.getServer()}/csrfToken`,
             dataType: 'json',
             cache: false
         })
@@ -57,21 +58,9 @@ const Comm = {
     var dfd = $.Deferred();
 
     const { url, method, params, retryFailures } = options;
-    
-    if (Comm.server == null) {
-
-        // Pull the server URL from the configuration
-        const serverURL = window.localStorage.getItem('serverURL');
-
-        // Parse the URL to extract only the protocol, host
-        const parser = document.createElement('a');
-        parser.href = serverURL;
-        Comm.server = `${parser.protocol}//${parser.host}`;
-    }
-
 
     const ajaxOptions = {
-      url: `${Comm.server}/${url}`,
+      url: `${Config.getServer()}/${url}`,
       method,
       data: params,
     };
@@ -79,7 +68,7 @@ const Comm = {
 
 
     // Fetch CSRF token if needed
-    if (!CSRF.token && method != 'GET') {
+    if (!CSRF.token && (!method || method !== 'GET')) {
         CSRF.fetch()
         .done(function(){
             // Resubmit request after getting token
@@ -103,6 +92,14 @@ const Comm = {
     // now send the request:
     $.ajax(ajaxOptions)
     .fail(function(req, status, statusText){
+        if (retryFailures) {
+          options.retryFailures = false;
+          const queuedRequest = new HTTPRequest({
+            options: options,
+          });
+          queuedRequest.save();
+          return;
+        }
 
         // was this a CSRF error?
         if (req.responseText.toLowerCase().indexOf('csrf') != -1) {
@@ -119,7 +116,8 @@ const Comm = {
 
 
         // check to see if responseText is our json response
-        var data = JSON.parse(req.responseText);
+        var data = null;
+        try { data = JSON.parse(req.responseText); } catch(e) {}
         // if (('object' == typeof data) && (data != null)) {
 
         //     if ('undefined' != typeof data.status) {
@@ -160,7 +158,7 @@ dfd.reject(data);
 
 
 
-    return Promise.resolve(dfd).catch(function(err){ });
+    return Promise.resolve(dfd);
 
 
     // // Convert the "thenable" returned by jQuery's ajax method to a normal Promise instance
