@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   'use strict';
 
   // Project configuration
-  var srcFiles = ['Gruntfile.js', 'www/js/**/*.js'];
+  var srcFiles = ['Gruntfile.js', 'www/js/**/*.js', 'www/plugins/**/*.js'];
   grunt.initConfig({
     jshint: {
       src: srcFiles,
