@@ -29,7 +29,7 @@ export default Page.extend('LandingControl', {
 
     this.element.one('pageshow', () => {
       this.initializeHighcharts();
-    })
+    });
     
   },
   

@@ -66,7 +66,6 @@ const Comm = {
     };
 
 
-
     // Fetch CSRF token if needed
     if (!CSRF.token && (!method || method !== 'GET')) {
         CSRF.fetch()
@@ -174,7 +173,6 @@ dfd.reject(data);
     //     queuedRequest.save();
     //   }
     // });
-
   },
 };
 
