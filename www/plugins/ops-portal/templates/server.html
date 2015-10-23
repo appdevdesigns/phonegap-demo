@@ -20,4 +20,7 @@
   {{#badResponse}}
     <p><i class="fa fa-circle" style="color:yellow;"></i> It doesn't look like this server accepts our mobile app. <br />Ask your administrator for the proper server.</p>
   {{/badResponse}}
+  {{#serverErr}}
+    <p><i class="fa fa-exclamation-triangle" style="color:orange;"></i> Something is wrong with the stored server! <br />Check your server's IP address and your VPN.</p>
+  {{/serverErr}}
 </div>
