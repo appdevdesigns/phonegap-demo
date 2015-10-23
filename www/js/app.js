@@ -9,6 +9,7 @@ import './jquery-mobile-config';
 // Load CanJS and globally used plugins
 import can from 'can';
 import 'can/construct/proxy';
+import 'can/construct/super';
 import 'can/map/backup';
 
 import Controls from './controls';

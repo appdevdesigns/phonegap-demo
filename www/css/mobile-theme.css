@@ -37,7 +37,8 @@ h1 span {
   margin-right: 10px;
 }
 
-#mpd-quickview h1 {font-size:153px;margin:0}
+/* #mpd-quickview h1 {font-size:153px;margin:0} */
+#mpd-quickview h1 {font-size:30vh;margin:0}
 
 .defeault tr {
   border:1px solid lightgray;

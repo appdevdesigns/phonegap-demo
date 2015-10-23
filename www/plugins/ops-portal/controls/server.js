@@ -18,13 +18,19 @@ export default Page.extend('ServerControl', {
     this._super(...arguments);
 
     this.scope.attr('mustConnect', !Config.getServer());
-    
+
     // Initialize the control scope and render it
     this.scope.attr('server', Config.getServer() || defaultServer);
     ['validating', 'good', 'noResponse', 'badResponse'].forEach(state => {
       this.scope.attr(state, can.compute(() => this.scope.attr('status') === state));
     });
     
+    this.checkServer();
+    setInterval(() => {
+      //Every X seconds
+      this.checkServer();
+    }, 20000);
+
     this.checkServer();
     setInterval(() => {
       //Every X seconds
@@ -72,6 +78,24 @@ export default Page.extend('ServerControl', {
         this.scope.attr('serverErr', true);
         //alert('Warning: Unable to connect to the server. Is your VPN on?');
       })
+    }
+  },
+
+  checkServer() {
+    var currentServer = Config.getServer();
+    if (currentServer) {
+      Config.loadConfig(currentServer).then(() => {
+        //Success, no need to warn anyone
+        //console.log('Server good');
+        this.scope.attr('serverErr', false);
+      })
+      .fail(err => {
+        //Failed, warn the user
+        //console.log('Could not connect to '+currentServer+'. Check the IP and your VPN.');
+        this.scope.attr('serverErr', true);
+
+        //alert('Warning: Unable to connect to the server. Is your VPN on?');
+      });
     }
   },
 

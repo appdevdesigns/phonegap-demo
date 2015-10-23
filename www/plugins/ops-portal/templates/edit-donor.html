@@ -11,28 +11,28 @@
     <div class="ui-grid-a">
       <!--First-->  
       <div class="ui-block-a padAll2">
-                <input type="text" data-inline="true" name="donors_firstName" id="textinput-fc" value="{{donor.donors_firstName}}">
+                <input type="text" data-inline="true" name="donors_firstName" id="textinput-fc" can-value="donor.donors_firstName">
         </div>
       <!--Last-->
         <div class="ui-block-b padAll2">
-                <input  type="text" data-inline="true" name="donors_lastName" id="textinput-fc" value="{{donor.donors_lastName}}">
+                <input  type="text" data-inline="true" name="donors_lastName" id="textinput-fc" can-value="donor.donors_lastName">
         </div>
     </div>
     <!-- Chinese Name -->
     <label for="fname">Nickname:</label>
-    <input  type="text" data-inline="true" name="donors_chineseName" id="textinput-fc" value="{{donor.donors_chineseName}}">
+    <input  type="text" data-inline="true" name="donors_chineseName" id="textinput-fc" can-value="donor.donors_chineseName">
     
     <!--Phone-->
     <div class="ui-grid-a">
         <div class="ui-block-a padAll2">
                 <label for="fname">Phone</label>
-                <input type="text" data-inline="true" name="donors_cellPhone" id="textinput-fc" value="{{donor.donors_homePhone}}">
+                <input type="text" data-inline="true" name="donors_cellPhone" id="textinput-fc" can-value="donor.donors_cellPhone">
         </div>
     <!--Email-->
         <div class="ui-block-b padAll2">
                 <label for="fname">Email</label>
                 
-                <input  type="text" data-inline="true" name="donors_email" id="textinput-fc" value="{{donor.donors_email}}">
+                <input  type="text" data-inline="true" name="donors_email" id="textinput-fc" can-value="donor.donors_email">
         </div> 
     </div>
     <!--Pledge-->
@@ -41,20 +41,20 @@
         <div class="ui-grid-a">
             <div class="ui-block-a padAll2">
               <!--Amount-->
-                    <input type="text" data-inline="true" name="donors_spouseFirstName" id="textinput-fc" value="" placeholder="Amount">
+                    <input type="text" data-inline="true" name="donors_spouseFirstName" id="textinput-fc" can-value="donor.donors_spouseFirstName" placeholder="Amount">
             </div>
             <div class="ui-block-b padAll2">
               <!--Type (Monthly/One-time)-->
-                <select form="donor-edit" data-inline="true" name="donors_type" id="donors_type" can-value="{{donors_type}}">
+                <select form="donor-edit" data-inline="true" name="donors_type" id="donors_type" can-value="donors_type">
                   <option value="monthly" >Monthly</option>
                   <option value="one-time">One-Time</option>  
                 </select>
             </div>
         </div>	
     </div>
-    <!--Additional Information-->
+    <!--Additional Information
     <label for="info">Additional Information:</label>
-    <textarea name="donors_cellPhone" id="info"></textarea>
+    <textarea name="" id="info"></textarea>-->
     <p>{{error}}</p>
     <button class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save">Save</button>
   </form>

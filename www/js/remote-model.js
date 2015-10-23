@@ -11,7 +11,9 @@ export default Model.extend('RemoteModel', {
 
   request(options) {
     options.url = this.url + options.url;
-    return Comm.request(options);
+    return Comm.request(options).catch(err => {
+      console.error(err);
+    });
   },
 
   findAll(params) {
