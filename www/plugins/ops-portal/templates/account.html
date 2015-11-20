@@ -20,7 +20,7 @@
 	</div>
 	<p>Estimated Account Balance: {{balance}}
 	<h3>12 month Summary</h3>
-	<table data-role="table" class="ui-responsive ui-shadow defeault">
+	<table data-role="table" class="ui-responsive ui-shadow default">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -31,7 +31,7 @@
 		<tbody>
 			{{#each periods}}
 			<tr class="period" data-id="{{id}}">
-				<td>{{date}}</td>
+				<td>{{formattedDate}}</td>
 				<td>{{income}}</td>
 				<td>{{expenses}}</td>
 			</tr>

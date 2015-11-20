@@ -20,5 +20,13 @@ export default RemoteModel.extend('AccountModel', {
 		income: 0,
 		expenses: 0,
 		closed: 0
-	},
-}, {});
+	}
+}, {
+
+	formattedDate() {
+	   var date = new Date(this.date);
+	   return date.getFullYear() + '-' + (date.getMonth()+1);
+	   // return date.toLocaleDateString();
+	}
+
+});
