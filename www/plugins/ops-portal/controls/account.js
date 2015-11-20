@@ -7,6 +7,8 @@ import Navigator from 'core/navigator';
 
 import Page from 'core/controls/page';
 
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 export default Page.extend('AccountControl', {
   pageId: 'account',
   parentId: 'landing',
@@ -43,14 +45,16 @@ export default Page.extend('AccountControl', {
             var aveExpenses = 0; // average expenses past 12 months
             var aveDelta = 0; // average difference between income and expenses
             for (var i = 1; i <= numMonths; ++i) {
-              aveIncome += list[i].income;
-              aveExpenses += list[i].expenses;
-              aveDelta += list[i].income - list[i].expenses;
+              var income = Number(list[i].income);
+              var expenses = Number(list[i].expenses);
+              aveIncome += income;
+              aveExpenses += expenses;
+              aveDelta += income - expenses;
             }
             aveIncome /= numMonths;
             aveExpenses /= numMonths;
             aveDelta /= numMonths;
-
+            
             var avePercent = (aveIncome / aveExpenses) * 100;
 
             var avePercentBg = 'green'; // average % background
@@ -74,13 +78,15 @@ export default Page.extend('AccountControl', {
             else {
               monthsLeft = "<i class='fa fa-thumbs-o-up'></i>";
             }
-
+            
+            var estimatedBalance = list[0].beginningBalance - list[0].expenses;
+            
             // assign scope variables
             this.scope.attr('periods', list);
-            this.scope.attr('balance', list[0].beginningBalance - list[0].expenses)
+            this.scope.attr('balance', estimatedBalance.toFixed(2))
             this.scope.attr('avePercent', avePercent.toFixed(0) + "%");
             this.scope.attr('avePercentBg', avePercentBg);
-            this.scope.attr('monthsLeft', monthsLeft);
+            this.scope.attr('monthsLeft', monthsLeft.toFixed(0));
             this.scope.attr('monthsLeftBg', monthsLeftBg);
 
           })
@@ -94,7 +100,6 @@ export default Page.extend('AccountControl', {
       var expenseData = [];
       var netData = [];
       var monthData = [];
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
       var numMonths = 12; // number of months to plot
       if (list.length < numMonths) {
@@ -103,9 +108,11 @@ export default Page.extend('AccountControl', {
       // We expect to receive period data newest to oldest.
       // We need to reverse the data order in the chart.
       for (var i = (numMonths - 1); i >= 0; --i) {
-        incomeData.push(list[i].income);
-        expenseData.push(-list[i].expenses);
-        netData.push(list[i].income - list[i].expenses);
+        var income = Number(list[i].income);
+        var expenses = Number(list[i].expenses);
+        incomeData.push(income);
+        expenseData.push(-expenses);
+        netData.push(income - expenses);
         var date = new Date(list[i].date);
         monthData.push(monthNames[date.getMonth()]);
       };
@@ -117,6 +124,9 @@ export default Page.extend('AccountControl', {
         },
         title: {
           text: 'Income, Expenses'
+        },
+        tooltip: {
+          valueDecimals: 2,
         },
         xAxis: {
           categories: monthData
@@ -133,20 +143,24 @@ export default Page.extend('AccountControl', {
             groupPadding: 0
           }
         },
-        series: [{
-          name: 'Income',
-          data: incomeData
-        }, {
+        series: [
+          {
+            name: 'Income',
+            data: incomeData
+          }, 
+          {
             name: 'Expenses',
             data: expenseData
-          }, {
+          }, 
+          {
             type: 'spline',
             name: 'Net',
             data: netData,
             marker: {
               lineWidth: 2
             }
-          }]
+          }
+        ]
       });
     },
 
