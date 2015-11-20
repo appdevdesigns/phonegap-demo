@@ -61,70 +61,96 @@ export default Page.extend('LandingControl', {
       },
     });
 
-    const income = 11365;
-    const expenses = -5100;
-    this.element.find('#average').highcharts(
-      {
-        colors: ['#3D9D50', '#DB1A23', '#000'],
-        chart: {
-          type: 'column',
-          margin: 10,
-        },
-        title: {
-          text: '',
-        },
-        xAxis: {
-          categories: ['12 month average'],
-          visible: false,
-        },
-        yAxis: {
-          visible: false,
-        },
-        legend: {
-          enabled: false,
-        },
-        credits: {
-          enabled: false,
-        },
-        plotOptions: {
-          series: {
-            stacking: 'normal',
-            groupPadding: 0,
-            lineWidth: 100,
-          },
-          column: {
-            stacking: 'normal',
-            dataLabels: {
-              enabled: true,
-              color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-              style: {
-                textShadow: '0 0 3px black',
+    //const income = 11365;
+    //const expenses = -5100;
+    
+    AccountModel.findAll()
+      .fail(function (err) {
+        console.log(err);
+      })
+      .then((list) => {
+        
+        var income = 0,
+            expenses = 0;
+        console.log(list);
+        for (var i=0; i<list.length; i++) {
+            income += Number(list[i].income);
+            expenses -= Number(list[i].expenses);
+        }
+        income /= list.length;
+        expenses /= list.length;
+        
+        this.element.find('#average').highcharts(
+          {
+            colors: ['#3D9D50', '#DB1A23', '#000'],
+            chart: {
+              type: 'column',
+              margin: 10,
+            },
+            title: {
+              text: '',
+            },
+            xAxis: {
+              categories: ['Monthly average'],
+              visible: false,
+            },
+            yAxis: {
+              visible: false,
+            },
+            legend: {
+              enabled: false,
+            },
+            credits: {
+              enabled: false,
+            },
+            plotOptions: {
+              series: {
+                stacking: 'normal',
+                groupPadding: 0,
+                lineWidth: 100,
+              },
+              column: {
+                stacking: 'normal',
+                tooltip: {
+                    valueDecimals: 2,
+                },
+                dataLabels: {
+                  format: "{point.y:.2f}",
+                  enabled: true,
+                  color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                  style: {
+                    textShadow: '0 0 3px black',
+                  },
+                },
               },
             },
-          },
-        },
-        series: [
-          {
-            name: 'Income',
-            data: [income],
-          }, {
-            name: 'Expenses',
-            data: [expenses],
-          }, {
-            type: 'spline',
-            name: 'Average',
-            data: [279],
-            marker: {
-              fillColor: income > expenses ? '#3D9D50' : '#DB1A23',
-              lineColor: '#FFFFFF',
-              lineWidth: 2,
-              radius: 10,
-              symbol: income > expenses ? 'triangle' : 'triangle down',
-            },
-          },
-        ],
-      }
-    );
+            series: [
+              {
+                name: 'Income',
+                data: [income],
+              }, {
+                name: 'Expenses',
+                data: [expenses],
+              }, {
+                type: 'spline',
+                name: 'Average',
+                data: [income + expenses],
+                tooltip: {
+                    valueDecimals: 2,
+                },
+                marker: {
+                  fillColor: income > expenses ? '#3D9D50' : '#DB1A23',
+                  lineColor: '#FFFFFF',
+                  lineWidth: 2,
+                  radius: 10,
+                  symbol: income > expenses ? 'triangle' : 'triangle down',
+                },
+                
+              },
+            ],
+          }
+        );
+    });
   },
 
   "#average click" : function(element, event){
