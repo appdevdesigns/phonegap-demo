@@ -4,7 +4,7 @@ import RemoteModel from 'core/remote-model';
 
 export default RemoteModel.extend('AccountModel', {
 	id: 'id',
-	url: 'opstool-account/account/period',
+	url: 'opstool-account-stewardwise/account/period',
 	attributes: {
 		id: 'string',
 		date: 'string', // starting date of period

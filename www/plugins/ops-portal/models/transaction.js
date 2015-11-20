@@ -4,7 +4,7 @@ import RemoteModel from 'core/remote-model';
 
 export default RemoteModel.extend('TransactionModel', {
 	id: 'id',
-	url: 'opstool-account/account/transaction',
+	url: 'opstool-account-stewardwise/account/transaction',
 	attributes: {
 		id: 'string',
 		period: 'string',

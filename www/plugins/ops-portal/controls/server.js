@@ -6,7 +6,7 @@ import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Config from 'core/config';
 
-const defaultServer = 'http://173.16.6.60:1337';
+const defaultServer = 'http://localhost:1337';
 
 export default Page.extend('ServerControl', {
   pageId: 'server',
@@ -25,12 +25,6 @@ export default Page.extend('ServerControl', {
       this.scope.attr(state, can.compute(() => this.scope.attr('status') === state));
     });
     
-    this.checkServer();
-    setInterval(() => {
-      //Every X seconds
-      this.checkServer();
-    }, 20000);
-
     this.checkServer();
     setInterval(() => {
       //Every X seconds
@@ -78,24 +72,6 @@ export default Page.extend('ServerControl', {
         this.scope.attr('serverErr', true);
         //alert('Warning: Unable to connect to the server. Is your VPN on?');
       })
-    }
-  },
-
-  checkServer() {
-    var currentServer = Config.getServer();
-    if (currentServer) {
-      Config.loadConfig(currentServer).then(() => {
-        //Success, no need to warn anyone
-        //console.log('Server good');
-        this.scope.attr('serverErr', false);
-      })
-      .fail(err => {
-        //Failed, warn the user
-        //console.log('Could not connect to '+currentServer+'. Check the IP and your VPN.');
-        this.scope.attr('serverErr', true);
-
-        //alert('Warning: Unable to connect to the server. Is your VPN on?');
-      });
     }
   },
 
