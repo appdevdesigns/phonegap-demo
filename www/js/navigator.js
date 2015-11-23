@@ -15,6 +15,8 @@ import HashMap from './util/HashMap';
 // It will be populated through calls to registerPage
 const pageRegistry = new HashMap(page => page.page);
 
+var pageStack = [];
+
 const Navigator = {
   /*
    * Register a page with the application navigator. This will initialize routing for the page.
@@ -99,6 +101,35 @@ const Navigator = {
    */
   getOpenPage() {
     return can.route.attr('page');
+  },
+  
+  /*
+   * Add a page onto the top of the stack
+   *
+   * @param string pageID
+   *    (Optional) Default is to add the current open page
+   */
+  push(pageID) {
+    if (!pageID) {
+      pageID = Navigator.getOpenPage();
+    }
+    if (pageID) {
+      pageStack.push(pageID);
+    }
+  },
+  
+  /*
+   * Remove a page from the top of the stack, and open it.
+   * @return boolean
+   */
+  pop() {
+    var pageID = pageStack.pop();
+    if (pageID) {
+      Navigator.openPage(pageID);
+      return true;
+    } else {
+      return false;
+    }
   },
 };
 

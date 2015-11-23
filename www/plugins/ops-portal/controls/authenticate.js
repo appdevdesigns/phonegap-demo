@@ -50,7 +50,9 @@ export default Page.extend('AuthenticateControl', {
 
         // Do something with data
         this.scope.attr('status', 'pass');
-        setTimeout(function() { Navigator.openPage('landing') }, 2000);
+        if (!Navigator.pop()) {
+          setTimeout(function() { Navigator.openPage('landing') }, 2000);
+        }
 
       });
 

@@ -54,8 +54,14 @@ const Comm = {
 
 
   // The "retryFailures" parameter specifies whether the request should be retried if it fails
-  request(options) {
-    var dfd = $.Deferred();
+  
+  /*
+   * @param object options
+   * @param Deferred dfd
+   *    Optional. By default a new Deferred will be created.
+   */
+  request(options, dfd) {
+    dfd = dfd || $.Deferred();
 
     const { url, method, params, retryFailures } = options;
 
@@ -85,75 +91,91 @@ const Comm = {
     };
 
 
-    //// TODO: Check to see if we are already Authenticating, and Queue requests
-    
-
-    // now send the request:
-    $.ajax(ajaxOptions)
-    .fail(function(req, status, statusText){
-        if (retryFailures) {
-          options.retryFailures = false;
-          const queuedRequest = new HTTPRequest({
+    //Check to see if we are already authenticating, and queue requests
+    if (pendingAuthentication.length > 0) {
+        pendingAuthentication.push({
             options: options,
-          });
-          queuedRequest.save();
-          return;
-        }
+            dfd: dfd
+        });
+    }
+    else {
 
-        // was this a CSRF error?
-        if (req.responseText.toLowerCase().indexOf('csrf') != -1) {
-
-            // reset our CSRF token
-            CSRF.token = null;
-
-            // resubmit the request 
-            Comm.request(options)
-            .then(dfd.resolve)
-            .catch(dfd.reject);
-            return;
-        }
-
-
-        // check to see if responseText is our json response
-        var data = null;
-        try { data = JSON.parse(req.responseText); } catch(e) {}
-        // if (('object' == typeof data) && (data != null)) {
-
-        //     if ('undefined' != typeof data.status) {
-
-        //         // this could very well be one of our messages:
-        //         _handleAppdevError( data );
-        //         return;
-        //     };
-        // }
-        
-        dfd.reject()
-        
-
-    })
-    .done(function(data, textStatus, req){
-
-        // Got a JSON response but was the service response an error?
-        if (data.status && (data.status == 'error')) {
-
-console.log('***** appdev error received!', data);
-
-            // _handleAppdevError(data);
-dfd.reject(data);
-            return;
-        }
-        // Success!
-        else {
-
-            // if this was an appdev packet, only return the data:
-            if (data.status && data.status == 'success') {
-                data = data.data;
+        // now send the request:
+        $.ajax(ajaxOptions)
+        .fail(function(res, status, statusText){
+            if (retryFailures) {
+              options.retryFailures = false;
+              const queuedRequest = new HTTPRequest({
+                options: options,
+              });
+              queuedRequest.save();
+              return;
             }
-
-            dfd.resolve(data);
-        }
-
-    })
+    
+            // was this a CSRF error?
+            if (res.responseText.toLowerCase().indexOf('csrf') != -1) {
+    
+                // reset our CSRF token
+                CSRF.token = null;
+    
+                // resubmit the request 
+                Comm.request(options)
+                .then(dfd.resolve)
+                .catch(dfd.reject);
+                return;
+            }
+            // Need to reauthenticate?
+            else if (res.status == 401) {
+                pendingAuthentication.push({
+                    options: options,
+                    dfd: dfd,
+                });
+                Navigator.push();
+                Navigator.openPage('login');
+            }
+    
+    
+            // check to see if responseText is our json response
+            var data = null;
+            try { data = JSON.parse(res.responseText); } catch(e) {}
+            // if (('object' == typeof data) && (data != null)) {
+    
+            //     if ('undefined' != typeof data.status) {
+    
+            //         // this could very well be one of our messages:
+            //         _handleAppdevError( data );
+            //         return;
+            //     };
+            // }
+            
+            dfd.reject()
+            
+    
+        })
+        .done(function(data, textStatus, req){
+    
+            // Got a JSON response but was the service response an error?
+            if (data.status && (data.status == 'error')) {
+    
+    console.log('***** appdev error received!', data);
+    
+                // _handleAppdevError(data);
+    dfd.reject(data);
+                return;
+            }
+            // Success!
+            else {
+    
+                // if this was an appdev packet, only return the data:
+                if (data.status && data.status == 'success') {
+                    data = data.data;
+                }
+    
+                dfd.resolve(data);
+            }
+    
+        })
+    }
 
 
 
@@ -176,20 +198,10 @@ dfd.reject(data);
   },
 };
 
-Authentication.on('loggedIn', () => { 
+Authentication.on('loggedIn', () => {
+  // Resubmit all queued requests, to be resolved with their original DFD
   pendingAuthentication.forEach(request => { 
-    Comm.request(request);
-    /*
-    Promise.resolve($.ajax(request)).catch(err => {
-    // Send to login page in case of 401
-      if (retryFailures) {
-        const queuedRequest = new HTTPRequest({
-          options: request,
-        });
-        queuedRequest.save();
-      }
-    });
-    */
+    Comm.request(request.options, request.dfd);
   });
   
   pendingAuthentication = [];

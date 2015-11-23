@@ -26,7 +26,7 @@ const plugin = {
   initialize() {
     // Activate the Navigator, which will setup routing and load the initial page
     if (Config.getServer()) {
-        Navigator.activate('login');
+        Navigator.activate('landing');
     } else {
         Navigator.activate('server')
     }
