@@ -4,7 +4,7 @@ import RemoteModel from 'core/remote-model';
 
 export default RemoteModel.extend('Donations', {
   id: 'id',
-  url: 'opstool-donations/donations',
+  url: 'opstool-donations-stewardwise/donations',
   attributes: {
     id: 'string|primaryKey|unique',
     donor_id: 'string',
