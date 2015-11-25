@@ -42,11 +42,13 @@ export default Page.extend('Donors', {
     
   '.donor click'(element){
       const donorId = $(element).data('id');
-
-    // Open the clicked donor
-    Navigator.openPage('donor', {
-      donorId: donorId,
-    });   
+      
+      if (donorId) {
+        // Open the clicked donor
+        Navigator.openPage('donor', {
+          donorId: donorId,
+        });
+      }
   },
    
   /*

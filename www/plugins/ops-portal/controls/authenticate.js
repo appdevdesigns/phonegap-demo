@@ -5,7 +5,6 @@ import Navigator from 'core/navigator';
 import Authentication from 'core/authentication';
 import Config from 'core/config';
 
-var serverURL = 'http://173.16.6.59:1337'
 export default Page.extend('AuthenticateControl', {
   pageId: 'login',
   template: 'plugins/ops-portal/templates/authenticate.html',
@@ -31,37 +30,41 @@ export default Page.extend('AuthenticateControl', {
     this.render();
   },
   
-  validateLogin:function () {
+  validateLogin() {
     
     var userID = this.scope.attr('username');
     var password = this.scope.attr('password');
 
-    if ( userID && password) {
+    if (userID && password) {
 
       this.scope.attr('status', 'validating');
 
-      Authentication.login( userID, password)
-      .fail((err, textStatus, errorThrown) =>{
+      Authentication.login(userID, password)
+      .fail((err, textStatus, errorThrown) => {
         console.log(err);
         // if status not found or failed login
         this.scope.attr('status', 'fail');
       })
       .then((data) => {
 
-        // Do something with data
+        // UI
         this.scope.attr('status', 'pass');
+        
+        // Restore previous page
         if (!Navigator.pop()) {
-          setTimeout(function() { Navigator.openPage('landing') }, 2000);
+          setTimeout(() => { 
+            // Or go to landing page if there was no previous page
+            Navigator.openPage('landing'); 
+          }, 2000);
         }
 
       });
 
     }
-      //});
 
   },
   
-  'form submit'(){
+  'form submit'() {
       this.validateLogin();
       //Prevent default submit behavior
       return false;

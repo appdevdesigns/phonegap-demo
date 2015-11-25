@@ -4,7 +4,7 @@ import can from 'can';
 import RemoteModel from 'core/remote-model';
 
 export default RemoteModel.extend('DonorModel', {
-  id: 'id',
+  id: 'donor_id',
 //  hasUuid: true,
   url: 'opstool-donations-stewardwise/donor',
   attributes: {
