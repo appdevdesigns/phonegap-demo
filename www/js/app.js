@@ -57,13 +57,14 @@ const app = {
   loadModels() {
     return Promise.all(can.map(Models, (Model, name) => {
       const dfd = Model.findAll({});
+      
       Model.list = new Model.List(dfd);
       Model.bind('created', (event, model) => Model.list.push(model));
-
+      
       // HACK: CanJS does not automatically remove destroyed models from the
       // list without this hack
       Model.list.bind('remove', () => {});
-
+      
       return dfd;
     }));
   },
@@ -94,16 +95,18 @@ const app = {
       return app.install();
     }).then(() => {
       console.log('Models installed');
-      return app.loadModels();
-    }).then(() => {
-      console.log('Models loaded');
-
+      
+      app.loadModels()
+        .then(() => {
+          console.log('Models loaded');
+        });
+      
       this.initializeControls();
+      console.log('Controls initialized');
 
       // Initialize the jQuery Mobile widgets
       $.mobile.initializePage();
-
-      this.activatePlugins();
+      console.log('Page initialized');
 
       // Initialize the transaction monitor
       const monitoredModels = [];
@@ -113,6 +116,11 @@ const app = {
         }
       });
       app.transactionMonitor = new TransactionMonitor({ monitoredModels });
+      console.log('Transaction monitor initialized');
+      
+      this.activatePlugins();
+      console.log('Plugins activated');
+      
       console.log('Finished initialization');
     });
   },

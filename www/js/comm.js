@@ -8,7 +8,7 @@ import Navigator from './navigator';
 import Authentication from './authentication';
 
 var pendingAuthentication = [];
-
+var authInProgress = false;
 
 const Server = {
 
@@ -92,14 +92,14 @@ const Comm = {
 
 
     //Check to see if we are already authenticating, and queue requests
-    if (pendingAuthentication.length > 0) {
+    if (authInProgress) {
         pendingAuthentication.push({
             options: options,
             dfd: dfd
         });
+        return;
     }
     else {
-
         // now send the request:
         $.ajax(ajaxOptions)
         .fail(function(res, status, statusText){
@@ -132,6 +132,7 @@ const Comm = {
                 });
                 Navigator.push();
                 Navigator.openPage('login');
+                return;
             }
     
     
@@ -199,6 +200,7 @@ const Comm = {
 };
 
 Authentication.on('loggedIn', () => {
+  authInProgress = false;
   // Resubmit all queued requests, to be resolved with their original DFD
   pendingAuthentication.forEach(request => { 
     Comm.request(request.options, request.dfd);
