@@ -61,18 +61,13 @@ export default Page.extend('LandingControl', {
       },
     });
 
-    //const income = 11365;
-    //const expenses = -5100;
-    
     AccountModel.findAll()
       .fail(function (err) {
         console.log(err);
       })
       .then((list) => {
-        
         var income = 0,
             expenses = 0;
-        console.log(list);
         for (var i=0; i<list.length; i++) {
             income += Number(list[i].income);
             expenses -= Number(list[i].expenses);

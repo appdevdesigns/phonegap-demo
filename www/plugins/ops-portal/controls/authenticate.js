@@ -27,6 +27,11 @@ export default Page.extend('AuthenticateControl', {
       }
     ));
     
+    // Clear previous status when showing the page
+    this.element.on('pageshow', () => {
+        this.scope.attr('status', '');
+    });
+    
     this.render();
   },
   
@@ -46,17 +51,18 @@ export default Page.extend('AuthenticateControl', {
         this.scope.attr('status', 'fail');
       })
       .then((data) => {
-
+        
         // UI
+        this.scope.attr('password', '');
         this.scope.attr('status', 'pass');
         
-        // Restore previous page
-        if (!Navigator.pop()) {
-          setTimeout(() => { 
-            // Or go to landing page if there was no previous page
-            Navigator.openPage('landing'); 
-          }, 2000);
-        }
+        setTimeout(() => { 
+            // Restore previous page
+            if (!Navigator.pop()) {
+              // Or go to landing page if there was no previous page
+              Navigator.openPage('landing');
+            }
+        }, 1000);
 
       });
 
