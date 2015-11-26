@@ -33,6 +33,26 @@ export default Page.extend('PeriodIncomeExpenses', {
         '.back click'() {
             Navigator.openParentPage();
         },
+        
+        'a.prev-btn click'(el, ev) {
+            ev.preventDefault();
+            var id = this.scope.attr('prev-id');
+            if (id) {
+                Navigator.openPage('period-income-expenses', {
+                    periodId: id
+                });
+            }
+        },
+        
+        'a.next-btn click'(el, ev) {
+            ev.preventDefault();
+            var id = this.scope.attr('next-id');
+            if (id) {
+                Navigator.openPage('period-income-expenses', {
+                    periodId: id
+                });
+            }
+        },
 
         routeChange(event, periodId) {
             // Load transactions from server
@@ -76,10 +96,10 @@ export default Page.extend('PeriodIncomeExpenses', {
             });
 
             // Add values to scope
-            this.scope.attr('periodDate', period.date);
+            this.scope.attr('periodDate', period.formattedDate());
             this.scope.attr('previousBalance', period.beginningBalance);
-            this.scope.attr('incomeTotal', incomeTotal);
-            this.scope.attr('expensesTotal', expensesTotal);
+            this.scope.attr('incomeTotal', incomeTotal.toFixed(2));
+            this.scope.attr('expensesTotal', expensesTotal.toFixed(2));
             this.scope.attr('incomeCategoryTotals', [...incomeCategoryTotals.entries()]);
             this.scope.attr('expenseCategoryTotals', [...expenseCategoryTotals.entries()]);
 
@@ -87,11 +107,22 @@ export default Page.extend('PeriodIncomeExpenses', {
         //TODO: remove this when findAll() filters by period id
         filterByPeriod(list, periodId) {
             var filteredList = [];
+            var periods = [];
+            
             list.forEach(function (item) {
                 if (item.period == periodId) {
                     filteredList.push(item);
                 }
-            })
+                if (periods.indexOf(String(item.period)) < 0) {
+                    periods.push(String(item.period));
+                }
+            });
+            
+            periods.sort();
+            var index = periods.indexOf(String(periodId));
+            this.scope.attr('prev-id', periods[index-1]);
+            this.scope.attr('next-id', periods[index+1]);
+            
             return filteredList;
         }
 
