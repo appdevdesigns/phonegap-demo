@@ -71,39 +71,52 @@ export default Page.extend('PeriodIncomeExpenses', {
         calculateTotals(period, transactions) {
             let incomeTotal = 0;
             let expensesTotal = 0;
-            let incomeCategoryTotals = new Map();
-            let expenseCategoryTotals = new Map();
-
+            let incomeCategories = {};
+            let expenseCategories = {};
+            
             transactions.forEach(function (item) {
+                let type = item.type;
+                // Income
                 if (0 < item.credit) {
                     incomeTotal += item.credit;
-                    if ( incomeCategoryTotals.has(item.category) ) {
-                        incomeCategoryTotals.set(item.category, incomeCategoryTotals.get(item.category) + item.credit);
-                    }
-                    else {
-                        incomeCategoryTotals.set(item.category, item.credit);
-                    }
-                 }
-                else { // expense
+                    incomeCategories[type] = incomeCategories[type] || 0;
+                    incomeCategories[type] += item.credit;
+                }
+                // Expense
+                else {
                     expensesTotal += item.debit;
-                    if ( expenseCategoryTotals.has(item.category) ) {
-                        expenseCategoryTotals.set(item.category, expenseCategoryTotals.get(item.category) + item.debit);
-                    }
-                    else {
-                        expenseCategoryTotals.set(item.category, item.debit);
-                    }
+                    expenseCategories[type] = expenseCategories[type] || 0;
+                    expenseCategories[type] += item.debit;
                 }
             });
-
+            
+            // Round totals to 2 decimal places & convert into arrays for the
+            // stache template
+            var incomeCategoryTotals = [];
+            for (var type in incomeCategories) {
+                incomeCategoryTotals.push({
+                    category: type,
+                    total: incomeCategories[type].toFixed(2)
+                });
+            }
+            var expenseCategoryTotals = [];
+            for (var type in expenseCategories) {
+                expenseCategoryTotals.push({
+                    category: type,
+                    total: expenseCategories[type].toFixed(2)
+                });
+            }
+            
             // Add values to scope
             this.scope.attr('periodDate', period.formattedDate());
             this.scope.attr('previousBalance', period.beginningBalance);
             this.scope.attr('incomeTotal', incomeTotal.toFixed(2));
             this.scope.attr('expensesTotal', expensesTotal.toFixed(2));
-            this.scope.attr('incomeCategoryTotals', [...incomeCategoryTotals.entries()]);
-            this.scope.attr('expenseCategoryTotals', [...expenseCategoryTotals.entries()]);
+            this.scope.attr('incomeCategoryTotals', incomeCategoryTotals);
+            this.scope.attr('expenseCategoryTotals', expenseCategoryTotals);
 
         },
+        
         //TODO: remove this when findAll() filters by period id
         filterByPeriod(list, periodId) {
             var filteredList = [];
