@@ -67,7 +67,7 @@ export default Page.extend('AccountControl', {
             var monthsLeftBg = 'green'; // months left background
             var monthsLeft;
             if (aveDelta < 0) {
-              monthsLeft = list[0].beginningBalance / -aveDelta;
+              monthsLeft = Math.round(list[0].beginningBalance / -aveDelta);
               if (monthsLeft < monthsLeftRedThreshold) {
                 monthsLeftBg = 'red';
               } else if (monthsLeft < monthsLeftYellowThreshold) {
@@ -86,7 +86,7 @@ export default Page.extend('AccountControl', {
             this.scope.attr('balance', estimatedBalance.toFixed(2))
             this.scope.attr('avePercent', avePercent.toFixed(0) + "%");
             this.scope.attr('avePercentBg', avePercentBg);
-            this.scope.attr('monthsLeft', monthsLeft.toFixed(0));
+            this.scope.attr('monthsLeft', monthsLeft);
             this.scope.attr('monthsLeftBg', monthsLeftBg);
 
           })
