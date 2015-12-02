@@ -28,21 +28,10 @@ export default Page.extend('Donor', {
     this.setDonor(null);
     this.render();
     
-    // Load donations from server
-    Donations.findAll({ donor_id: can.route.attr('donorId') })
-    .fail(function(err){
-        console.log(err);
-    })
-    .then((list) => {
-        this.scope.attr('donations', list );
-    })
-    
-
   },
   
   '.back click'() {
       Navigator.openParentPage();
-  
   },
   
   '.edit click'() {
@@ -66,11 +55,21 @@ export default Page.extend('Donor', {
       // Lookup the contact in the global list by its contact
       donor = Donor.store[donorId];
       if (!donor) {
-         // No contact has that contactId
+         // No donor has that ID
          console.error('Attempting to navigate to a non-existent donor!');
          Navigator.openParentPage();
       }
       this.setDonor(donor);
+      
+      // Load donations from server
+      Donations.findAll({ donor_id: donorId })
+      .fail((err) => {
+          console.log(err);
+      })
+      .then((list) => {
+          this.scope.attr('donations', list);
+      })
+      
   },
 
   
