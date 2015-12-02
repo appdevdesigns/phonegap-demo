@@ -25,12 +25,6 @@ export default Page.extend('ServerControl', {
       this.scope.attr(state, can.compute(() => this.scope.attr('status') === state));
     });
     
-    this.checkServer();
-    setInterval(() => {
-      //Every X seconds
-      this.checkServer();
-    }, 20000);
-
     this.render();
   },
 
