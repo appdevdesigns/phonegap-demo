@@ -16,7 +16,7 @@ export default Page.extend('Donors', {
     //Get Donor list from Server
     this.scope.attr('donors', Donor.list);
     
-    const donors= this.donors = Donor.list;
+    const donors = this.donors = Donor.list;
     
     // Initialize the control scope and render it
     this.render();
