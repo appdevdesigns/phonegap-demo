@@ -6,13 +6,13 @@
 	<!-- <div class="ui-grid-a ui-responsive"> -->
 	<div class="ui-grid-a">
 		<div class="ui-block-a">
-			<div id="ave-percent" class="ui-corner-all mrgnR10 mrgnL10" style="width: 100%; margin: 0 auto; background: {{avePercentBg}}">
+			<div id="ave-percent" class="ui-corner-all mrgnR10 mrgnL10" style="width: 95%; margin: 0 auto; background: {{avePercentBg}}">
 				<h1 class="center" style="margin: 0">{{avePercent}}</h1>
 				<p class="center" style="font-size: 70%; margin-top: 0">Income/Expense Ratio</p>
 			</div>
 		</div>
 		<div class="ui-block-b padAll2">
-			<div id="months-left" class="ui-corner-all mrgnL10 mrgnR10" style="width: 100%; margin: 0 auto; background: {{monthsLeftBg}}">
+			<div id="months-left" class="ui-corner-all mrgnL10 mrgnR10" style="width: 95%; margin: 0 auto; background: {{monthsLeftBg}}">
 				<h1 class="center" style="margin: 0">{{{monthsLeft}}}</h1>
 				<p class="center" style="font-size: 70%; margin-top: 0">Months left</p>
 			</div>
@@ -20,10 +20,10 @@
 	</div>
 	<p>Estimated Account Balance: {{balance}}
 	<h3>12 month Summary</h3>
-	<table data-role="table" class="ui-responsive ui-shadow default">
+	<table data-role="table" data-mode="column-toggle" class="ui-responsive ui-shadow defeault">
 		<thead>
 			<tr>
-				<th>Date</th>
+				<th data-priority="1">Date</th>
 				<th>Donation</th>
 				<th>Expenses</th>
 			</tr>
