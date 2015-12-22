@@ -17,6 +17,9 @@ const pageRegistry = new HashMap(page => page.page);
 
 var pageStack = [];
 
+// The time when Navigator.openPage() was last used
+var lastNavTime = 0;
+
 const Navigator = {
   /*
    * Register a page with the application navigator. This will initialize routing for the page.
@@ -80,10 +83,20 @@ const Navigator = {
     const routeAttrs = can.extend({
       page: page,
     }, routeData);
-
+    
     // Calculate the new URL based on the route attributes, then navigate to it
     const newUrl = can.route.url(routeAttrs);
-    window.location = newUrl;
+    
+    // Needs to be at least 30 ms between each page open
+    const diff = new Date() - lastNavTime;
+    var delay = 0;
+    if (diff < 30) {
+        delay = 30 - diff;
+    }
+    setTimeout(() => {
+        window.location.assign( newUrl );
+        lastNavTime = new Date();
+    }, delay);
   },
 
   /*
