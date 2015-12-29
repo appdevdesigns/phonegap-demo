@@ -42,8 +42,61 @@ export default RemoteModel.extend('DonorModel', {
     donors_nationality: '',
     donors_chineseName: ''
   },
+  
+  /**
+   * Fetches a list of potential matches to the given set of data.
+   *
+   * For privacy and access control reasons, the data returned in the list may
+   * not necessarily contain all details of the matching donors. It is not 
+   * the same as an array of proper DonorModel instances.
+   */
+  findSimilar(params) {
+    return this.request({
+        url: '/similar',
+        params,
+        method: 'GET'
+    });
+  },
+  
+  /**
+   * Creates/activates a relation between the current staff and a donor.
+   *
+   * Uses the same server route as create/update but sends no data besides
+   * the donor_id.
+   */
+  saveRelation(donorID) {
+    return this.request({
+        url: '/' + donorID,
+        method: 'PUT'
+    })
+    .then(data => {
+        // Instantiate a new model instance with the returned data.
+        const model = new DonorModel();
+        for (var key in data) {
+            model.attr(key, data[key]);
+        }
+        model.isSaved = true;
+        
+        // Make sure the data gets put into the local cache.
+        model.created(data);
+        
+        return model;
+    });
+  }
+
 }, {
   name: can.compute(function() {
     return `${this.attr('donors_firstName')} ${this.attr('donors_lastName')}`;
   }),
+  
+  findSimilar() {
+    var params = this.serialize();
+    return DonorModel.findSimilar(params);
+  },
+  
+  saveRelation() {
+    var donorID = this.attr('donor_id');
+    return DonorModel.saveRelation(donorID);
+  }
+  
 });

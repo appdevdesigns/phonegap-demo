@@ -1,0 +1,32 @@
+
+<div data-role="popup" style="min-width: 20em">
+
+    <ul data-role="listview" data-inset="true">
+        
+        <li data-role="list-divider">Create new entry</li>
+        {{#with donor}}
+        <li class="donor"><a href="#" class="new-donor">
+            <h2>{{donors_firstName}} {{donors_lastName}}</h2>
+            <p>{{donors_city}} {{donors_province}}</p>
+            <p>{{donors_homePhone}}</p>
+            <p>{{donors_cellPhone}}</p>
+            <p>{{donors_email}}</p>
+            <p class="ui-li-aside"><strong>{{donors_chineseName}}</strong></p>
+        </a></li>
+        {{/with}}
+        
+        <li data-role="list-divider">Use existing match</li>
+        {{#each matches}}
+        <li class="donor"><a href="#" class="existing-donor" donor_id="{{donor_id}}">
+            <h2>{{donors_firstName}} {{donors_lastName}}</h2>
+            <p>{{donors_city}} {{donors_province}}</p>
+            <p>{{donors_homePhone}}</p>
+            <p>{{donors_cellPhone}}</p>
+            <p>{{donors_email}}</p>
+            <p class="ui-li-aside"><strong>{{donors_chineseName}}</strong></p>
+        </a></li>
+        {{/each}}
+        
+    </ul>
+
+</div>

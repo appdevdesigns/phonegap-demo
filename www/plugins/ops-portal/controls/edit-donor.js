@@ -25,28 +25,138 @@ export default Page.extend('DonorEdit', {
   
   },
   
+  /**
+   * Save donor data to the server and open the donor details page.
+   *
+   * @param DonorModel donor
+   */
+  saveDonor(donor) {
+      donor.save()
+        .then(() => {
+            Navigator.openPage('donor', {donorId: donor.donor_id});
+        })
+        .fail(() => {
+            this.setError('Save failed. Please try again.');
+        });
+  },
+  
+  /**
+   * Save a new relationship between this staff user and a donor.
+   *
+   * @param int donorID
+   */
+  saveRelation(donorID) {
+      // Create a dummy donor model instance with just the donor_id attribute
+      var donor = new Donor();
+      donor.attr('donor_id', donorID);
+      // Saving this to the server will create a donor relation, and do nothing
+      // else.
+      Donor.saveRelation(donorID)
+        .then(() => {
+            Navigator.openPage('donor', {donorId: donorID});
+        })
+        .fail(() => {
+            this.setError('Save failed. Please try again.');
+        });
+  },
+  
+  /**
+   * Fetch a list of potential duplicate donor entries from the server.
+   * 
+   * @param DonorModel donor
+   */
+  findSimilar(donor) {
+      donor.findSimilar()
+        .then((list) => {
+            if (list.length > 0) {
+                this.showSimilar(donor, list);
+            } else {
+                this.saveDonor(donor);
+            }
+        })
+        .fail((err) => {
+            console.log('findsimilar error', err);
+        });
+  },
+  
+  /**
+   * Show a popup dialog with choices for saving the newly entered donor data,
+   * or using one of the existing similar matches already on file.
+   *
+   * @param DonorModel donor
+   * @param array list
+   *    An array of donor details
+   */
+  showSimilar(donor, list) {
+        // Render html
+        var dialog = this.element.find('#similar-donors');
+        var domfrag = can.view('plugins/ops-portal/templates/similar-donors.html', {
+            donor: donor,
+            matches: list,
+        });
+        dialog.html(domfrag);
+        
+        // Attach donor data to DOM elements
+        dialog.find('a.new-donor').data('donor', donor);
+        dialog.find('a.existing-donor').each((index, element) => {
+            // Possible that the donor data on the existing donors is not
+            // complete. We really only need the donor_id here.
+            $(element).data('donor', list[index]);
+        });
+        
+        // Init widgets
+        dialog.popup({
+            dismissible: false,
+            hisotry: false,
+            positionTo: 'window',
+            overlayTheme: 'b',
+            afterClose(ev, ui) {
+                dialog.popup('destroy');
+            }
+        });
+        dialog.find('ul').listview();
+        
+        dialog.popup('open');
+  },
+  
   '.back click'() {
       window.history.back();
   },
   
-  '.save click' () {
+  '.save click'(el, ev) {
       var donor = this.scope.attr('donor');
       var values = this.element.find('form').serializeArray();
-      values.forEach( function (value){
+      values.forEach((value) => {
           donor.attr(value.name, value.value);
       });
-      donor.save()
-          .then(() => {
-              Navigator.openPage('donor', {donorId: donor.id});
-              })
-        .fail(() => {
-        this.setError('Save failed. Please try again.');
-      });
-    
-    // Prevent default submit behavior
-    return false;
+      
+      if (donor.donor_id) {
+          // Save changes to existing donor
+          this.saveDonor(donor);
+      } else {
+          // New donor entry. Check if donor is already on file.
+          this.findSimilar(donor);
+      }
+      
+      // Prevent default submit behavior
+      ev.preventDefault();
+      return false;
   },
-  //TO DO: Add donations type select
+  
+  /**
+   * Handle clicks from within the Similar Donors popup dialog
+   */
+  '#similar-donors a click'(el, ev) {
+    ev.preventDefault();
+    
+    var donor = el.data('donor');
+    if (el.hasClass('new-donor')) {
+        this.saveDonor(donor);
+    } 
+    else if (el.hasClass('existing-donor')) {
+        this.saveRelation(donor.donor_id);
+    }
+  },
   
   setError(error){
     this.scope.attr('error', error);
@@ -70,7 +180,7 @@ export default Page.extend('DonorEdit', {
           //TO DO: Backup Donor
         }
         else{
-         // No contact has that contactId
+         // No donor has that donorId
          console.error('Attempting to navigate to a non-existent donor!');
          Navigator.openParentPage();
         }
