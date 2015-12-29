@@ -28,32 +28,32 @@ export default Page.extend('AddDonation', {
   
     this.scope.attr('date', function (){
       var date = new Date();
-      return date.toDateString(); 
+      var dateString = date.toISOString();
+      return dateString.slice(0, 10);
     });
   },
   
-  '.back click'() {
+  '.back click'(el, ev) {
       Navigator.openParentPage();
   },
   
-  '.add click' () {
+  '.add click' (el, ev) {
+      ev.preventDefault();
+      
       var donation = new Donation;
       var values = this.element.find('form').serializeArray();
-      values.forEach(function (value){
+      values.forEach((value) => {
           donation.attr(value.name, value.value);
       });
-      donation.donor_id = this.scope.donor.id;
+      donation.donor_id = this.scope.donor.donor_id;
       console.log(donation);
       donation.save()    
         .then(() => {
-              Navigator.openParentPage();
-              })
-        .fail(function (){
-              console.log('Save failed. Please try again.');
-      });
-      
-      // Prevent default submit behavior
-      return false;
+            Navigator.openParentPage();
+        })
+        .fail(() => {
+            console.log('Save failed. Please try again.');
+        });
   },
   
   setDonor(donor){

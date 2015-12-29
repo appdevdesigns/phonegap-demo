@@ -11,15 +11,24 @@
                 <!--img src="img/man.jpg" class="center"/-->
             </div>
         </div>
+        
         <div class="ui-block-b">
-
-                <label for="text-basic">{{donor.name}}</label>
-                <input type="text" disabled="disabled" name="text-basic" id="text-basic" value="{{donor.donors_cellPhone}}">
-                <input type="text" disabled="disabled" name="text-basic" id="text-basic" value="{{donor.donors_email}}">
-                <a class="ui-btn ui-shadow ui-corner-all add-donation">New gift</a>
+        {{#with donor}}
+            <h3>{{name}}</h3>
+            {{#if donors_cellPhone}}
+            <p><a href="#" class="ui-btn ui-mini ui-btn-icon-right ui-icon-phone call-donor">{{donors_cellPhone}}</a></p>
+            {{/if}}
+            {{#if donors_email}}
+            <p><a href="#" class="ui-btn ui-mini ui-btn-icon-right ui-icon-mail mail-donor">{{donors_email}}</a></p>
+            {{/if}}
+            <a class="ui-btn ui-shadow ui-corner-all add-donation">New gift</a>
+        {{/with}}
         </div>
+        
     </div>
-        <hr>
+    
+    <hr>
+    
     <div>
         <h3 class="nomrgnT">Giving History:</h3>
         <table data-role="tables" class="ui-responsive ui-table defeault">

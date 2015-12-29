@@ -1,27 +1,35 @@
 <div data-role="header">
-		<a data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline back">Back</a>
-		<h1>{{donor.name}}</h1>
+    <a data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</a>
+    <h1>{{donor.name}}</h1>
 </div>
+
 <div data-role="main" class="ui-content">
-	<form>
+    <form>
+        
         <!--Date-->
-		<div class="ui-field-contain">
-			<label for="name">Date:</label>
-            <input type="text" name ="donItem_dateReceived" data-role="date" value="{{date}}">
-		</div>
+        <div class="ui-field-contain">
+            <label for="donItem_dateReceived">Date:</label>
+            <input type="date" name ="donItem_dateReceived" data-role="date" value="{{date}}">
+        </div>
+        
         <!--Amount-->
-		<div class="ui-field-contain">
-			<label for="name">Amount:</label>
-			<input type="text" name="donItem_amount" id="name" can-value="donor.donors_spouseFirstName">	
-		</div>
+        <div class="ui-field-contain">
+            <label for="donItem_amount">Amount:</label>
+            <input type="number" name="donItem_amount" id="donItem_amount" can-value="donor.donors_spouseFirstName">
+        </div>
+        
         <!--Type (one-time/monthly)-->
-		<div class="ui-field-contain">
-			<label for="name">Type:</label>
-			<input type="text" name="donItem_type" id="name" can-value="donor.donors_type">	
-		</div>
-        <!--Description
-		<label for="info">Description:</label>
-		<textarea name="addinfo" id="info"></textarea>-->
-	</form>
-	<button class="mrgntop50 ui-btn ui-shadow ui-corner-all add">Add</button>
+        <div class="ui-field-contain">
+            <label for="donItem_type">Type:</label>
+            <select name="donItem_type" id="donItem_type">
+                <option value="1">One-time</option>
+                <option value="2">Monthly</option>
+            </select>
+        </div>
+        
+        <!--Description-->
+        <label for="donItem_description">Description:</label>
+        <textarea name="donItem_description" id="donItem_description"></textarea>
+    </form>
+    <button class="mrgntop50 ui-btn ui-shadow ui-corner-all add">Add Donation</button>
 </div>

@@ -34,16 +34,26 @@ export default Page.extend('Donor', {
       Navigator.openParentPage();
   },
   
-  '.edit click'() {
-	  const donorId = this.scope.donor.id;
+  '.edit click'(el, ev) {
+      ev.preventDefault();
+	  const donorId = this.scope.donor.donor_id;
       Navigator.openPage('edit-donor', { editDonorId: donorId });  
   },
   
-  '.add-donation click'(){
-      const donorId = this.scope.donor.id;
+  '.add-donation click'(el, ev) {
+      ev.preventDefault();
+      const donorId = this.scope.donor.donor_id;
       Navigator.openPage('add-donation', { 
          addDonorId: donorId 
       });  
+  },
+  
+  '.call-donor click'(el, ev) {
+    ev.preventDefault();
+  },
+  
+  '.mail-donor click'(el, ev) {
+    ev.preventDefault();
   },
     
   setDonor(donor) {
