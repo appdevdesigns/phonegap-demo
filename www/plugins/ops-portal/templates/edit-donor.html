@@ -1,50 +1,63 @@
 <div data-role="header">
     <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</a>
-    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline import">Import</a>
+    <!-- <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline import">Import</a> -->
     <h1>{{donor.name}}</h1>
 </div>
 
 <div data-role="main" class="ui-content">
   <form id="donor-edit">
     <!--Name -->
-    <label for="fname">Name:</label>
+    <label for="donors_firstName">Name:</label>
     <div class="ui-grid-a">
       <!--First-->  
       <div class="ui-block-a padAll2">
-                <input type="text" data-inline="true" name="donors_firstName" id="textinput-fc" can-value="donor.donors_firstName">
-        </div>
+          <input type="text" placeholder="Given Name" data-inline="true" name="donors_firstName" id="fname" can-value="donor.donors_firstName">
+      </div>
       <!--Last-->
+      <div class="ui-block-b padAll2">
+          <input  type="text" placeholder="Surname" data-inline="true" name="donors_lastName" id="lname" can-value="donor.donors_lastName">
+      </div>
+    </div>
+    
+    <!-- Chinese Name -->
+    <label for="donors_chineseName">Nickname:</label>
+    <input  type="text" data-inline="true" name="donors_chineseName" id="donors_chineseName" can-value="donor.donors_chineseName">
+    
+    <div class="ui-grid-a">
+        <div class="ui-block-a padAll2">
+            <!--City-->
+            <label for="donors_city">City</label>
+            <input type="text" data-inline="true" name="donors_city" id="donors_city" can-value="donor.donors_city">
+        </div>
         <div class="ui-block-b padAll2">
-                <input  type="text" data-inline="true" name="donors_lastName" id="textinput-fc" can-value="donor.donors_lastName">
+            <label for="donors_province">State/Province</label>
+            <input type="text" data-inline="true" name="donors_province" id="donors_province" can-value="donor.donors_province">
         </div>
     </div>
-    <!-- Chinese Name -->
-    <label for="fname">Nickname:</label>
-    <input  type="text" data-inline="true" name="donors_chineseName" id="textinput-fc" can-value="donor.donors_chineseName">
+
     
     <!--Phone-->
     <div class="ui-grid-a">
         <div class="ui-block-a padAll2">
-                <label for="fname">Phone</label>
-                <input type="text" data-inline="true" name="donors_cellPhone" id="textinput-fc" can-value="donor.donors_cellPhone">
+            <label for="donors_cellphone">Cell Phone</label>
+            <input type="tel" data-inline="true" name="donors_cellPhone" id="donors_cellphone" can-value="donor.donors_cellPhone">
         </div>
     <!--Email-->
         <div class="ui-block-b padAll2">
-                <label for="fname">Email</label>
-                
-                <input  type="text" data-inline="true" name="donors_email" id="textinput-fc" can-value="donor.donors_email">
+            <label for="donors_email">Email</label>
+            <input type="email" data-inline="true" name="donors_email" id="donors_email" can-value="donor.donors_email">
         </div> 
     </div>
+    
     <!--Pledge-->
+    <!--
     <div class="ui-content corner-all ui-shadow mrgnbot20">
         <label for="fname">Giving</label>
         <div class="ui-grid-a">
             <div class="ui-block-a padAll2">
-              <!--Amount-->
-                    <input type="text" data-inline="true" name="donors_spouseFirstName" id="textinput-fc" can-value="donor.donors_spouseFirstName" placeholder="Amount">
+              <input type="text" data-inline="true" name="donors_spouseFirstName" id="textinput-fc" can-value="donor.donors_spouseFirstName" placeholder="Amount">
             </div>
             <div class="ui-block-b padAll2">
-              <!--Type (Monthly/One-time)-->
                 <select form="donor-edit" data-inline="true" name="donors_type" id="donors_type" can-value="donors_type">
                   <option value="monthly" >Monthly</option>
                   <option value="one-time">One-Time</option>  
@@ -52,11 +65,13 @@
             </div>
         </div>	
     </div>
+    -->
+    
     <!--Additional Information
     <label for="info">Additional Information:</label>
     <textarea name="" id="info"></textarea>-->
     <p>{{error}}</p>
-    <button class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save">Save</button>
+    <button type="button" class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save">Save</button>
   </form>
 </div>
 
