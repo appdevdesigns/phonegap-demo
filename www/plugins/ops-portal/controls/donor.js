@@ -23,7 +23,15 @@ export default Page.extend('Donor', {
       
     // Listen for changes to the route  
     this.on('route.change', this.proxy('routeChange'));
-
+    
+    // Auto update the list of donations when new ones are added
+    Donations.bind('created', (event, model) => { 
+        var list = this.scope.attr('donations');
+        if (list) {
+            list.unshift(model);
+        }
+    });
+    
     // Initialize the control scope and render it
     this.setDonor(null);
     this.render();
@@ -82,5 +90,4 @@ export default Page.extend('Donor', {
       
   },
 
-  
 });

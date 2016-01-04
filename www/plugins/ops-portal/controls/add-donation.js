@@ -45,9 +45,8 @@ export default Page.extend('AddDonation', {
       values.forEach((value) => {
           donation.attr(value.name, value.value);
       });
-      donation.donor_id = this.scope.donor.donor_id;
-      console.log(donation);
-      donation.save()    
+      donation.attr('donor_id', this.scope.donor.donor_id);
+      donation.save()
         .then(() => {
             Navigator.openParentPage();
         })
