@@ -1,24 +1,33 @@
 <div data-role="header">
-  <h3>Landing</h3>
+  <h3>Ops</h3>
   <button class="ui-btn-right ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-icon-gear ui-btn-icon-right edit-server-url">{{#serverErr}}<i class="fa fa-exclamation-triangle" style="color:orange;"></i>{{/serverErr}} Server</button>
 </div>
 <div role="main" data-control="landing" class="ui-content">
   <div class="ui-grid-a">
+    
     <!--graph-->
     <div class="ui-block-a" style="height:200px;">
       <div id="average" style="height:200px;"></div>
       <a href="#"></a>
     </div>
     <!--/-->
+    
     <!--MPD status quick view-->
     <!-- <div class="ui-block-b" style="height: 400px;"> -->
     <div class="ui-block-b" >
       <!-- <div id="mpd-quickview" style="position: relative; top: 50%; transform: translateY(-50%)"> -->
       <div id="mpd-quickview" style="position: relative; top: 50%; ">
-        <a href="#"><h1 class="center">80</h1></a>
+        <a href="#">
+        {{#if mpd.hundredPercent}}
+            <h1 class="center hundred-percent">{{mpd.percentOfNeed}}</h1>
+        {{else}}
+            <h1 class="center">{{mpd.percentOfNeed}}</h1>
+        {{/if}}
+        </a>
       </div>
     </div>
     <!--/-->
+    
   </div>
 
   <ul data-role="listview" data-inset="true">

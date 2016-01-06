@@ -29,6 +29,11 @@ export default Page.extend('LandingControl', {
         this.scope.attr('serverErr', false);
     });
     
+    this.app.modelsLoaded.then(() => {
+        var mpd = MpdModel.list.attr(0);
+        this.scope.attr('mpd', mpd);
+    });
+    
     this.render();
 
     this.element.one('pageshow', () => {
@@ -64,11 +69,9 @@ export default Page.extend('LandingControl', {
       },
     });
     
-    AccountModel.findAll()
-      .fail((err) => {
-        console.log(err);
-      })
-      .then((list) => {
+    this.app.modelsLoaded
+      .then(() => {
+        var list = AccountModel.list;
         var income = 0,
             expenses = 0;
         for (var i=0; i<list.length; i++) {
@@ -162,6 +165,11 @@ export default Page.extend('LandingControl', {
 
   '#average click'(element, event) {
     Navigator.openPage("account");
+  },
+  
+  '#mpd-quickview a click'(element, event) {
+    event.preventDefault();
+    Navigator.openPage('mpd');
   },
 
   '.donors click'() {
