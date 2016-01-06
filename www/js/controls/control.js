@@ -17,7 +17,11 @@ export default can.Control.extend({
     this.controlId = this.prototype.controlId = can.hyphenate(this.fullName).toLowerCase();
   },
 }, {
-  init(element) {
+  init(element, options) {
+    // The app may have passed in a reference to itself
+    if (options.app) {
+        this.app = options.app;
+    }
     // This data will be available to the template
     this.scope = new can.Map();
 

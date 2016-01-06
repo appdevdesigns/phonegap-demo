@@ -83,7 +83,7 @@ const app = {
     // Turn all placeholder elements with a "data-control" attribute that matches a control id
     // into an instance of that control type
     can.each(Controls, Control => {
-      const control = new Control(`[data-control=${Control.controlId}]`, {}); // jshint ignore:line
+      const control = new Control(`[data-control=${Control.controlId}]`, {app: this}); // jshint ignore:line
     });
   },
 
@@ -96,7 +96,7 @@ const app = {
     }).then(() => {
       console.log('Models installed');
       
-      app.loadModels()
+      this.modelsLoaded = app.loadModels()
         .then(() => {
           console.log('Models loaded');
         });
