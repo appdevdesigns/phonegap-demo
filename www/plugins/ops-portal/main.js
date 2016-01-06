@@ -13,13 +13,14 @@ import EditDonor from './controls/edit-donor';
 import PeriodIncomeExpenses from './controls/period-income-expenses';
 import Authenticate from './controls/authenticate';
 import AddDonation from './controls/add-donation';
+import MpdReport from './controls/mpd-report';
 
 // Load models
 import DonationsModel from './models/donations';
 import DonorModel from './models/donor';
 import AccountModel from './models/account';
 import TransactionModel from './models/transaction';
-
+import MpdModel from './models/mpd';
 
 const plugin = {
   // Initialize the plugin
@@ -32,8 +33,8 @@ const plugin = {
     }
   },
 
-  controls: { Landing, Account, Donors, Donor, Server, EditDonor, PeriodIncomeExpenses, Authenticate, AddDonation },
-  models: { DonorModel, AccountModel, DonationsModel, TransactionModel },
+  controls: { Landing, Account, Donors, Donor, Server, EditDonor, PeriodIncomeExpenses, Authenticate, AddDonation, MpdReport },
+  models: { DonorModel, AccountModel, DonationsModel, TransactionModel, MpdModel },
 
 };
 

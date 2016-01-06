@@ -1,0 +1,42 @@
+<div data-role="header">
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</a>
+    <h1>MPD</h1>
+</div>
+
+<div data-role="main" class="ui-content">
+    {{#each mpdList}}
+    <table data-role="tables" class="ui-responsive ui-table defeault">
+        <tbody>
+            <tr>
+                <td>MPD Goal</td>
+                <td>{{mpdGoal}}</td>
+            </tr>
+            <tr>
+                <td>Average Monthly MPD Income</td>
+                <td>{{avgIncome}}</td>
+            </tr>
+            <tr>
+                <td>% Foreign Contributions</td>
+                <td>{{percentForeignContrib}}%</td>
+            </tr>
+            <tr>
+                <td>% Local Contributions</td>
+                <td>{{percentLocalContrib}}%</td>
+            </tr>
+            <tr>
+                <td>Average Monthly Expense</td>
+                <td>{{avgExpense}}</td>
+            </tr>					
+            <tr>
+                <td>Need Remaining</td>
+                <td>{{needRemaining}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="mpd-quickview" class="ui-corner-all ui-shadow mrgntop20">
+        <h1 class="center">{{percentOfNeed}}%</h1>
+    </div>
+    {{/each}}
+
+</div>
