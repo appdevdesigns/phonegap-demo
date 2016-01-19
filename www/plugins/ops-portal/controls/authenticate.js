@@ -12,7 +12,7 @@ export default Page.extend('AuthenticateControl', {
   // Initialize the control
   init(element) {
     // Call the Page constructor
-    this._super(...arguments);
+    this._super.apply(this, arguments);
 
     this.scope.attr('validating', can.compute(() => {
         return this.scope.attr('status')==='validating';

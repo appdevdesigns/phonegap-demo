@@ -20,7 +20,7 @@ export default Page.extend('AccountControl', {
       var _this = this;
 
       // Call the Page constructor
-      this._super(...arguments);
+      this._super.apply(this, arguments);
 
       // Initialize the control scope and render it
       this.render();

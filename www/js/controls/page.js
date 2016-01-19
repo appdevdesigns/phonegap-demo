@@ -30,7 +30,7 @@ const Page = Control.extend({
   // Register derived page controls with the Navigator component
   extend() {
     // Call the original extend function
-    const PageControl = this._super(...arguments);
+    const PageControl = this._super.apply(this, arguments);
     Navigator.registerPage(PageControl.pageId, PageControl.parentId, PageControl.pattern || (PageControl.routeAttr ? `:${PageControl.routeAttr}` : null));
 
     // Add the page placeholder to the root level of the document where jQuery Mobile will recognize it
@@ -57,7 +57,7 @@ const Page = Control.extend({
     }
 
     // Call the Control constructor
-    return this._super(...arguments);
+    return this._super.apply(this, arguments);
   },
 });
 

@@ -13,7 +13,7 @@ export default Page.extend('LandingControl', {
   // Initialize the control
   init(element) {
     // Call the Page constructor
-    this._super(...arguments);
+    this._super.apply(this, arguments);
 
     // Initialize the control scope and render it
     this.checkServer();

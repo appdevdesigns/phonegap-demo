@@ -19,7 +19,7 @@ export default can.Model.extend('Model', {
       },
     });
 
-    const Model = this._super(...arguments);
+    const Model = this._super.apply(this, arguments);
 
     if (Model.hasUuid) {
       // For models with a UUID field, the primary key defaults to an automatically generated UUID

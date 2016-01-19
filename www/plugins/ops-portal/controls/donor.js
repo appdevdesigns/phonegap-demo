@@ -19,7 +19,7 @@ export default Page.extend('Donor', {
   // Initialize the control
   init(element) {
     // Call the Page constructor
-    this._super(...arguments);
+    this._super.apply(this, arguments);
       
     // Listen for changes to the route  
     this.on('route.change', this.proxy('routeChange'));

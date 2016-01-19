@@ -15,7 +15,7 @@ export default Page.extend('ServerControl', {
   // Initialize the control
   init(element) {
     // Call the Page constructor
-    this._super(...arguments);
+    this._super.apply(this, arguments);
 
     this.scope.attr('mustConnect', !Config.getServer());
 

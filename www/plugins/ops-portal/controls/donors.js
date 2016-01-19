@@ -11,7 +11,7 @@ export default Page.extend('Donors', {
   // Initialize the control
   init(element) {
     // Call the Page constructor
-    this._super(...arguments);
+    this._super.apply(this, arguments);
 
     //Get Donor list from Server
     this.scope.attr('donors', Donor.list);

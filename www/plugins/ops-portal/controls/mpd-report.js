@@ -17,7 +17,7 @@ export default Page.extend('MpdReport', {
   // Initialize the control
   init(element) {
     // Call the Page constructor
-    this._super(...arguments);
+    this._super.apply(this, arguments);
     
     this.scope.attr('mpdList', Mpd.list);
     
