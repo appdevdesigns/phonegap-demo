@@ -8,6 +8,8 @@ let config = {};
 const attrs = can.Map();
 
 const Config = {
+  whenServerValidated: $.Deferred(),
+  
   loadConfig(serverURL) {
     // Parse the URL to extract only the protocol and host
     const parser = document.createElement('a');
@@ -17,6 +19,7 @@ const Config = {
     return $.ajax(`${server}/mobile/policy`).then(res => {
       config = res;
       this.setServer(server);
+      this.whenServerValidated.resolve();
     });
   },
 
