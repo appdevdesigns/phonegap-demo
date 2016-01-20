@@ -31,16 +31,25 @@ export default Page.extend('ServerControl', {
   validateServer() {
     this.scope.attr('status', 'validating');
     const serverURL = this.scope.attr('server');
-    Config.loadConfig(serverURL).then(() => {
+    Config.loadConfig(serverURL)
+    .then(() => {
       // The configuration loaded sucessfully
       this.scope.attr('status', 'good');
       this.scope.attr('serverErr', false);
 
       setTimeout(() => {
         this.scope.attr('mustConnect', false);
-        Navigator.openPage('landing');
+        if (Navigator.getOpenPage() == 'server') {
+            // We are still on the server page. Go to landing.
+            Navigator.openPage('landing');
+        } else {
+            // Some other system has navigated away. (Probably the login page.)
+            // Make it return to landing instead of server once it is done.
+            Navigator.stackReplace('server', 'landing');
+        }
       }, 2000);
-    }).fail(err => {
+    })
+    .fail(err => {
       console.log(err);
 
       // A status code of 0 means "not found"

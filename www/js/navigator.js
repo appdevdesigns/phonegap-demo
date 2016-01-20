@@ -71,7 +71,7 @@ const Navigator = {
       Navigator.openPage(defaultPage);
     }
   },
-
+  
   /*
    * Navigate to a new page.
    *
@@ -144,6 +144,17 @@ const Navigator = {
       return false;
     }
   },
+  
+  /**
+   * Replace a page on the stack
+   */
+  stackReplace(target, replacement) {
+    var pos = pageStack.indexOf(target);
+    if (pos >= 0) {
+      pageStack.splice(pos, 1, replacement);
+    }
+  }
+  
 };
 
 export default Navigator;
