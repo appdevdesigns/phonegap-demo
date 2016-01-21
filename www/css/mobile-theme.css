@@ -37,8 +37,14 @@ h1 span {
   margin-right: 10px;
 }
 
+/* when the graph finishes loading, it will obscure the ajax-loader image */
+#average {
+    /*background: url(../bower_components/jquery-mobile/images/ajax-loader.gif) center center no-repeat;*/
+    background: url(loader.gif) center center no-repeat;
+}
+
 /* #mpd-quickview h1 {font-size:153px;margin:0} */
-#mpd-quickview h1 {font-size:30vh;margin:0}
+#mpd-quickview h1 {font-size:25vh;margin:0}
 #mpd-quickview h1.hundred-percent {
     font-size: 20vh;
     color: green;
