@@ -86,7 +86,12 @@ export default RemoteModel.extend('DonorModel', {
 
 }, {
   name: can.compute(function() {
-    return `${this.attr('donors_firstName')} ${this.attr('donors_lastName')}`;
+    var result = `${this.attr('donors_firstName')} ${this.attr('donors_lastName')}`;
+    var chineseName = this.attr('donors_chineseName');
+    if (chineseName) {
+        result += ` (${chineseName})`;
+    }
+    return result;
   }),
   
   findSimilar() {
