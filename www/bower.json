@@ -1,5 +1,5 @@
 {
-  "name": "phonegap-demo",
+  "name": "mpd-tools",
   "private": true,
   "dependencies": {
     "canjs": "~2.2.7",
