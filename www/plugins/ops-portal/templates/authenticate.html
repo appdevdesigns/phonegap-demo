@@ -1,22 +1,27 @@
 <div data-role="header">
-  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</button>
-  <h3>Log In</h3>
+  <!-- back -->
+  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back i18n">回去</button>
+  <!-- log in -->
+  <h3 class="i18n">登录</h3>
 </div>
 <div role="main" class="ui-content">
   <form>
-    <label for="username">Username:</label>
+    <label for="username" class="i18n">用户名:</label>
     <input type="text" id="username" can-value="username" autofocus>
-    <label for="password">Password:</label>
+    <label for="password" class="i18n">密码:</label>
     <input type="password" id="password" can-value="password">
-    <button type="submit" class="ui-btn ui-corner-all create" {{#validating}} disabled {{/validating}}>Submit</button>
+    <button type="submit" class="ui-btn ui-corner-all create i18n" {{#validating}} disabled {{/validating}}>提交</button>
   </form>
   {{#validating}}
-    <p><i class="fa fa-spinner fa-spin" style="color:grey;"></i> Validating...</p>
+    <!-- validating... -->
+    <p><i class="fa fa-spinner fa-spin i18n" style="color:grey;"></i> 验证...</p>
   {{/validating}}
   {{#pass}}
-    <p><i class="fa fa-circle" style="color:green;"></i> Successful log in!</p>
+    <!-- successful log in! -->
+    <p><i class="fa fa-circle i18n" style="color:green;"></i> 成功登录!</p>
   {{/pass}}
   {{#fail}}
-    <p><i class="fa fa-circle" style="color:red;"></i> Your log in attempt failed.</p>
+    <!-- your log in attempt failed. -->
+    <p><i class="fa fa-circle i18n" style="color:red;"></i> 您的登录尝试失败</p>
   {{/fail}}
 </div>

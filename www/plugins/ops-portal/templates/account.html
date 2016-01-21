@@ -1,38 +1,38 @@
 <div data-role="header" class="ui-header ui-bar-a" role="banner">
-  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</button>
+  <!-- back -->
+  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back i18n">回去</button>
   <span class="ui-title"></span>
 </div>
-<!--
-<div data-role="header">
-	<button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline back" style="z-index: 1;">Back</button>
-</div>
--->
 
 <div data-role="main" class="ui-content">
 	<div id="year" style="width: 100%; height: 400px; margin: 0 auto"></div>
-	<!-- <div class="ui-grid-a ui-responsive"> -->
 	<div class="ui-grid-a">
 		<div class="ui-block-a">
 			<div id="ave-percent" class="ui-corner-all mrgnR10 mrgnL10" style="width: 95%; margin: 0 auto; background: {{avePercentBg}}">
 				<h1 class="center" style="margin: 0">{{avePercent}}</h1>
-				<p class="center" style="font-size: 70%; margin-top: 0">Income/Expense Ratio</p>
+				<!-- income/expense ratio -->
+				<p class="center i18n" style="font-size: 70%; margin-top: 0">收入/支出比率</p>
 			</div>
 		</div>
 		<div class="ui-block-b padAll2">
 			<div id="months-left" class="ui-corner-all mrgnL10 mrgnR10" style="width: 95%; margin: 0 auto; background: {{monthsLeftBg}}">
 				<h1 class="center" style="margin: 0">{{{monthsLeft}}}</h1>
-				<p class="center" style="font-size: 70%; margin-top: 0">Months left</p>
+				<!-- months left -->
+				<p class="center i18n" style="font-size: 70%; margin-top: 0">留下个月</p>
 			</div>
 		</div>
 	</div>
-	<p>Estimated Account Balance: {{balance}}
-	<h3>12 month Summary</h3>
+	<!-- estimated account balance: -->
+	<p>估计帐户余额: {{balance}}
+	<h3 class="i18n">12个月汇总</h3>
 	<table data-role="table" data-mode="column-toggle" class="ui-responsive ui-shadow defeault">
 		<thead>
 			<tr>
-				<th data-priority="1">Date</th>
-				<th>Donation</th>
-				<th>Expenses</th>
+				<th data-priority="1" class="i18n">日期</th>
+				<!-- donation -->
+				<th class="i18n">捐款</th>
+				<!-- expenses -->
+				<th class="i18n">开支</th>
 			</tr>
 		</thead>
 		<tbody>

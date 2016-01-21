@@ -1,6 +1,8 @@
 <div data-role="header">
-    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</a>
-    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-right ui-icon-edit edit">Edit</a>
+    <!-- back -->
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back i18n">回去</a>
+    <!-- edit -->
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-right ui-icon-edit edit i18n">编辑</a>
     <h1>&nbsp;</h1>
 </div>
 <div data-role="main" class="ui-content">
@@ -21,7 +23,8 @@
             {{#if donors_email}}
             <p><a href="#" class="ui-btn ui-mini ui-btn-icon-right ui-icon-mail mail-donor">{{donors_email}}</a></p>
             {{/if}}
-            <a class="ui-btn ui-shadow ui-corner-all add-donation">New gift</a>
+            <!-- new gift -->
+            <a class="ui-btn ui-shadow ui-corner-all add-donation i18n">新的捐赠</a>
         {{/with}}
         </div>
         
@@ -30,12 +33,15 @@
     <hr>
     
     <div>
-        <h3 class="nomrgnT">Giving History:</h3>
+        <!-- giving history -->
+        <h3 class="nomrgnT i18n">捐赠记录:</h3>
         <table data-role="tables" class="ui-responsive ui-table defeault">
             <thead>
                 <tr>
-                    <th>(date)</td>
-                    <th>(amount)</td>
+                    <!-- date -->
+                    <th class="i18n">日期</td>
+                    <!-- amount -->
+                    <th class="i18n">量</td>
                 </tr>
             </thead>
             <tbody>

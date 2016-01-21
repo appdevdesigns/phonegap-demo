@@ -1,36 +1,36 @@
 <div data-role="header">
-    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</a>
-    <!-- <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline import">Import</a> -->
+    <!-- back -->
+    <a class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back i18n">回去</a>
     <h1>{{donor.name}}</h1>
 </div>
 
 <div data-role="main" class="ui-content">
   <form id="donor-edit">
     <!--Name -->
-    <label for="donors_firstName">Name:</label>
+    <label for="donors_firstName" class="i18n">名称:</label>
     <div class="ui-grid-a">
       <!--First-->  
       <div class="ui-block-a padAll2">
-          <input type="text" placeholder="Given Name" data-inline="true" name="donors_firstName" id="fname" can-value="donor.donors_firstName">
+          <input type="text" placeholder="拼音名字" data-inline="true" name="donors_firstName" id="fname" can-value="donor.donors_firstName">
       </div>
       <!--Last-->
       <div class="ui-block-b padAll2">
-          <input  type="text" placeholder="Surname" data-inline="true" name="donors_lastName" id="lname" can-value="donor.donors_lastName">
+          <input  type="text" placeholder="拼音姓氏" data-inline="true" name="donors_lastName" id="lname" can-value="donor.donors_lastName">
       </div>
     </div>
     
     <!-- Chinese Name -->
-    <label for="donors_chineseName">Nickname:</label>
+    <label for="donors_chineseName" class="i18n">中文名:</label>
     <input  type="text" data-inline="true" name="donors_chineseName" id="donors_chineseName" can-value="donor.donors_chineseName">
     
     <div class="ui-grid-a">
         <div class="ui-block-a padAll2">
             <!--City-->
-            <label for="donors_city">City</label>
+            <label for="donors_city" class="i18n">市</label>
             <input type="text" data-inline="true" name="donors_city" id="donors_city" can-value="donor.donors_city">
         </div>
         <div class="ui-block-b padAll2">
-            <label for="donors_province">State/Province</label>
+            <label for="donors_province" class="i18n">省</label>
             <input type="text" data-inline="true" name="donors_province" id="donors_province" can-value="donor.donors_province">
         </div>
     </div>
@@ -39,12 +39,12 @@
     <!--Phone-->
     <div class="ui-grid-a">
         <div class="ui-block-a padAll2">
-            <label for="donors_cellphone">Cell Phone</label>
+            <label for="donors_cellphone" class="i18n">手机</label>
             <input type="tel" data-inline="true" name="donors_cellPhone" id="donors_cellphone" can-value="donor.donors_cellPhone">
         </div>
     <!--Email-->
         <div class="ui-block-b padAll2">
-            <label for="donors_email">Email</label>
+            <label for="donors_email" class="i18n">电子邮件</label>
             <input type="email" data-inline="true" name="donors_email" id="donors_email" can-value="donor.donors_email">
         </div> 
     </div>
@@ -71,7 +71,7 @@
     <label for="info">Additional Information:</label>
     <textarea name="" id="info"></textarea>-->
     <p>{{error}}</p>
-    <button type="button" class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save">Save</button>
+    <button type="button" class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save i18n">保存</button>
   </form>
   
   <div id="similar-donors">

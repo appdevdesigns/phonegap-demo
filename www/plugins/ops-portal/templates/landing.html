@@ -1,6 +1,8 @@
 <div data-role="header">
-  <h3>Ops</h3>
-  <button class="ui-btn-right ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-icon-gear ui-btn-icon-right edit-server-url">{{#serverErr}}<i class="fa fa-exclamation-triangle" style="color:orange;"></i>{{/serverErr}} Server</button>
+  <!-- main title -->
+  <h3>MPD</h3>
+  <!-- server -->
+  <button class="ui-btn-right ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-icon-gear ui-btn-icon-right edit-server-url">{{#serverErr}}<i class="fa fa-exclamation-triangle" style="color:orange;"></i>{{/serverErr}} <span class="i18n">服务器</span></button>
 </div>
 <div role="main" data-control="landing" class="ui-content">
   <div class="ui-grid-a">
@@ -13,9 +15,7 @@
     <!--/-->
     
     <!--MPD status quick view-->
-    <!-- <div class="ui-block-b" style="height: 400px;"> -->
     <div class="ui-block-b" >
-      <!-- <div id="mpd-quickview" style="position: relative; top: 50%; transform: translateY(-50%)"> -->
       <div id="mpd-quickview" style="position: relative; top: 50%; ">
         <a href="#">
         {{#if mpd.hundredPercent}}
@@ -31,7 +31,8 @@
   </div>
 
   <ul data-role="listview" data-inset="true">
-    <li><a class="donors">Donors</a></li>
+    <!-- donors -->
+    <li><a class="donors i18n">捐助者</a></li>
   </ul>
 
 </div>

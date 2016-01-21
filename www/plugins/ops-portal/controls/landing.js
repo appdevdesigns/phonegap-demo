@@ -92,7 +92,8 @@ export default Page.extend('LandingControl', {
               text: '',
             },
             xAxis: {
-              categories: ['Monthly average'],
+              // monthly average
+              categories: ['月平均'],
               visible: false,
             },
             yAxis: {
@@ -127,14 +128,16 @@ export default Page.extend('LandingControl', {
             },
             series: [
               {
-                name: 'Income',
+                // Income
+                name: '收入',
                 data: [income],
               }, {
-                name: 'Expenses',
+                // Expense
+                name: '开支',
                 data: [expenses],
               }, {
                 type: 'spline',
-                name: 'Average',
+                name: '平均',
                 data: [income + expenses],
                 tooltip: {
                     valueDecimals: 2,

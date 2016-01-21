@@ -1,24 +1,31 @@
 <div data-role="header" class="ui-header ui-bar-a" role="banner">
-  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</button>
+  <!-- back -->
+  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back i18n">回去</button>
   <span class="ui-title"></span>
 </div>
 
 <div data-role="main" class="ui-content">
 	<div class="ui-grid-b">
-		<div class="ui-block-a"><a href="#anylink" class="ui-btn ui-shadow ui-corner-all prev-btn">Prev</a></div>
+	    <!-- prev -->
+		<div class="ui-block-a"><a href="#anylink" class="ui-btn ui-shadow ui-corner-all prev-btn i18n">以前</a></div>
 		<div class="ui-block-b">
 			<h1 class="center">{{periodDate}}</h1></div>
-		<div class="ui-block-c"><a href="#anylink" class="ui-btn ui-shadow ui-corner-all next-btn">Next</a></div>
+        <!-- next -->
+		<div class="ui-block-c"><a href="#anylink" class="ui-btn ui-shadow ui-corner-all next-btn i18n">下边</a></div>
 	</div>
 	<div>
-		<p>previous balance:<span class="prevbal">{{previousBalance}}</span></p>
+	    <!-- previous balance -->
+		<p class="i18n">前一资产负债:<span class="prevbal">{{previousBalance}}</span></p>
 		<div data-role="collapsible">
-			<h1><span>Income total:</span> <span class="v1">{{incomeTotal}}</span></h1>
+		    <!-- income total: -->
+			<h1><span class="i18n">总收入:</span> <span class="v1">{{incomeTotal}}</span></h1>
 			<table data-role="table" class="ui-responsive defeault">
 				<thead>
 					<tr>
-						<th>Category</th>
-						<th>Amount</th>
+					    <!-- category -->
+						<th class="i18n">类别</th>
+						<!-- amount -->
+						<th class="i18n">量</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,12 +39,15 @@
 			</table>
 		</div>
 		<div data-role="collapsible">
-			<h1><span>Expenses total:</span> <span class="v1">{{expensesTotal}}</span></h1>
+		    <!-- expenses total -->
+			<h1><span class="i18n">总费用:</span> <span class="v1">{{expensesTotal}}</span></h1>
 			<table data-role="table" class="ui-responsive defeault">
 				<thead>
 					<tr>
-						<th>Category</th>
-						<th>Amount</th>
+					    <!-- category -->
+						<th class="i18n">类别</th>
+						<!-- amount -->
+						<th class="i18n">量</th>
 					</tr>
 				</thead>
 				<tbody>
