@@ -21,7 +21,12 @@ const Database = {
 
   init() {
     const openDatabase = cordova.platformId === 'browser' ? window.openDatabase : window.sqlitePlugin.openDatabase;
-    this.db = openDatabase('db.sqlite', '1.0', 'Database', -1);
+    //this.db = openDatabase('db.sqlite', '1.0', 'Database', -1);
+    this.db = openDatabase({
+        name: 'db.sqlite', 
+        location: 'default',
+        //'1.0', 'Database', -1
+    });
   },
 
   install(tableData) {

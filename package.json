@@ -1,5 +1,5 @@
 {
-  "name": "phonegap-demo",
+  "name": "net.appdevdesigns.mpd",
   "private": true,
   "devDependencies": {
     "body-parser": "^1.13.2",

@@ -1,14 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="net.appdevdesigns.mpd-tools" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="net.appdevdesigns.mpd" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>MPD</name>
     <description>MPD tools</description>
     <author href="http://www.appdevdesigns.net">AppDev Designs</author>
     <content src="index.html" />
     <access origin="*" />
+    <engine name="android" />
+    <engine name="ios" />
+    <!--
     <engine name="android" spec="^4.1.0" />
     <engine name="ios" spec="^3.9.0" />
+    -->
     <engine name="browser" spec="^3.6.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.1" />
     <plugin name="cordova-plugin-whitelist" spec="~1.0.0" />
-    <plugin name="io.litehelpers.cordova.sqlite" spec="~0.7.7" />
+    <preference name="BackupWebStorage" value="local" />
+    <plugin name="cordova-sqlite-storage" spec="~1.4.7" />
 </widget>
