@@ -1,7 +1,6 @@
 'use strict';
 
-import highchartsModule from 'highcharts';
-const { Highcharts } = highchartsModule;
+import Highcharts from 'highcharts';
 import Page from 'core/controls/page';
 import Navigator from 'core/navigator';
 import Config from 'core/config';
