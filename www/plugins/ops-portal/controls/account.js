@@ -123,7 +123,8 @@ export default Page.extend('AccountControl', {
           type: 'column'
         },
         title: {
-          text: 'Income, Expenses'
+          // income, expenses
+          text: '收入, 开支'
         },
         tooltip: {
           valueDecimals: 2,
@@ -145,16 +146,19 @@ export default Page.extend('AccountControl', {
         },
         series: [
           {
-            name: 'Income',
+            // income
+            name: '收入',
             data: incomeData
           }, 
           {
-            name: 'Expenses',
+            // expenses
+            name: '开支',
             data: expenseData
           }, 
           {
+            // net
+            name: '净',
             type: 'spline',
-            name: 'Net',
             data: netData,
             marker: {
               lineWidth: 2

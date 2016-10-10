@@ -1,5 +1,6 @@
 <div data-role="header">
-    <a data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back">Back</a>
+    <!-- back -->
+    <a data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back i18n">回去</a>
     <h1>{{donor.name}}</h1>
 </div>
 
@@ -8,28 +9,31 @@
         
         <!--Date-->
         <div class="ui-field-contain">
-            <label for="donItem_dateReceived">Date:</label>
+            <label for="donItem_dateReceived" class="i18n">日期:</label>
             <input type="date" name ="donItem_dateReceived" data-role="date" value="{{date}}">
         </div>
         
         <!--Amount-->
         <div class="ui-field-contain">
-            <label for="donItem_amount">Amount:</label>
+            <label for="donItem_amount">量:</label>
             <input type="number" name="donItem_amount" id="donItem_amount" can-value="donItem_amount">
         </div>
         
         <!--Type (one-time/monthly)-->
         <div class="ui-field-contain">
-            <label for="donItem_type">Type:</label>
+            <label for="donItem_type">类型:</label>
             <select name="donItem_type" id="donItem_type">
-                <option value="1">One-time</option>
-                <option value="2">Monthly</option>
+                <!-- one time -->
+                <option value="1" class="i18n">一次</option>
+                <!-- monthly -->
+                <option value="2" class="i18n">每月一次</option>
             </select>
         </div>
         
         <!--Description-->
-        <label for="donItem_description">Description:</label>
+        <label for="donItem_description" class="i18n">描述:</label>
         <textarea name="donItem_description" id="donItem_description"></textarea>
     </form>
-    <button class="mrgntop50 ui-btn ui-shadow ui-corner-all add">Add Donation</button>
+    <!-- add donation -->
+    <button class="mrgntop50 ui-btn ui-shadow ui-corner-all add" class="i18n">加入捐赠</button>
 </div>

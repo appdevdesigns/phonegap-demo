@@ -1,26 +1,35 @@
 <div data-role="header">
-  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back" {{#mustConnect}} disabled {{/mustConnect}}>Back</button>
-  <h3>Server</h3>
+  <!-- back -->
+  <button type="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-nodisc-icon ui-alt-icon ui-btn-icon-left ui-icon-back back" {{#mustConnect}} disabled {{/mustConnect}}>回去</button>
+  <!-- server -->
+  <h3 class="i18n">服务器</h3>
 </div>
 <div role="main" class="ui-content">
   <form>
-    <label for="server-url">Server URL:</label>
+    <!-- server url -->
+    <label for="server-url" class="i18n">服务器URL:</label>
     <input type="text" id="server-url" can-value="server" autofocus>
-    <button type="submit" class="ui-btn ui-corner-all submit" {{#validating}} disabled {{/validating}}>Submit</button>
+    <!-- submit -->
+    <button type="submit" class="ui-btn ui-corner-all submit i18n" {{#validating}} disabled {{/validating}}>提交</button>
   </form>
   {{#validating}}
-    <p><i class="fa fa-spinner fa-spin" style="color:grey;"></i> Validating...</p>
+    <!-- validating -->
+    <p><i class="fa fa-spinner fa-spin i18n" style="color:grey;"></i> 验证...</p>
   {{/validating}}
   {{#good}}
-    <p><i class="fa fa-circle" style="color:green;"></i> Looks good!</p>
+    <!-- looks good! -->
+    <p><i class="fa fa-circle i18n" style="color:green;"></i> 看起来不错!</p>
   {{/good}}
   {{#noResponse}}
-    <p><i class="fa fa-circle" style="color:red;"></i> Error: Can't connect. Do you need your VPN on?</p>
+    <!-- error: can't connect. do you need your vpn on? -->
+    <p><i class="fa fa-circle i18n" style="color:red;"></i> 错误：无法连接。为您的VPN上？</p>
   {{/noResponse}}
   {{#badResponse}}
-    <p><i class="fa fa-circle" style="color:yellow;"></i> It doesn't look like this server accepts our mobile app. <br />Ask your administrator for the proper server.</p>
+    <!-- it doesn't look like this server accepts our mobile app. ask your administrator for the proper server. -->
+    <p><i class="fa fa-circle i18n" style="color:yellow;"></i> 它看起来并不像该服务器接受我们的移动应用程序。 <br/>请向管理员询问正确的服务器。</p>
   {{/badResponse}}
   {{#serverErr}}
-    <p><i class="fa fa-exclamation-triangle" style="color:orange;"></i> Something is wrong with the stored server! <br />Check your server's IP address and your VPN.</p>
+    <!-- something is wrong with the stored server! check your server's ip address and your vpn. -->
+    <p><i class="fa fa-exclamation-triangle i18n" style="color:orange;"></i> 检查服务器的地址和VPN</p>
   {{/serverErr}}
 </div>

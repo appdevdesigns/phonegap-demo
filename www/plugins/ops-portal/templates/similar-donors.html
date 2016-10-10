@@ -3,7 +3,8 @@
 
     <ul data-role="listview" data-inset="true">
         
-        <li data-role="list-divider">Create new entry</li>
+        <!-- create new entry -->
+        <li data-role="list-divider" class="i18n">创建新条目</li>
         {{#with donor}}
         <li class="donor"><a href="#" class="new-donor">
             <h2>{{donors_firstName}} {{donors_lastName}}</h2>
@@ -15,7 +16,8 @@
         </a></li>
         {{/with}}
         
-        <li data-role="list-divider">Use existing match</li>
+        <!-- use existing match -->
+        <li data-role="list-divider" class="i18n">利用现有的</li>
         {{#each matches}}
         <li class="donor"><a href="#" class="existing-donor" donor_id="{{donor_id}}">
             <h2>{{donors_firstName}} {{donors_lastName}}</h2>
