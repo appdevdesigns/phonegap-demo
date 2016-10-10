@@ -7,7 +7,7 @@
 <div role="main" class="ui-content">
   <form>
     <label for="username" class="i18n">用户名:</label>
-    <input type="text" id="username" can-value="username" autofocus>
+    <input type="text" id="username" can-value="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus>
     <label for="password" class="i18n">密码:</label>
     <input type="password" id="password" can-value="password">
     <button type="submit" class="ui-btn ui-corner-all create i18n" {{#validating}} disabled {{/validating}}>提交</button>
