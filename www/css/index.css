@@ -1,0 +1,3 @@
+.ui-mobile [data-role=page] {
+    border-top: solid #bbb 20px !important;
+}
