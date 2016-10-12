@@ -71,7 +71,13 @@
     <label for="info">Additional Information:</label>
     <textarea name="" id="info"></textarea>-->
     <p>{{error}}</p>
-    <button type="button" class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save i18n">保存</button>
+    <button type="button" class="ui-btn-inline ui-btn ui-shadow ui-corner-all float-right save i18n">
+    {{#if loading}}
+      <i class="fa fa-spinner fa-spin i18n" style="color:grey;"></i>
+    {{else}}
+        保存
+    {{/if}}
+    </button>
   </form>
   
   <div id="similar-donors">

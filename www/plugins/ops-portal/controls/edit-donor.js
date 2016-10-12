@@ -31,7 +31,11 @@ export default Page.extend('DonorEdit', {
    * @param DonorModel donor
    */
   saveDonor(donor) {
+      this.scope.attr('loading', true);
       donor.save()
+        .always(() => {
+            this.scope.attr('loading', false);
+        })
         .then(() => {
             Navigator.openPage('donor', {donorId: donor.donor_id});
         })
@@ -49,9 +53,15 @@ export default Page.extend('DonorEdit', {
       // Create a dummy donor model instance with just the donor_id attribute
       var donor = new Donor();
       donor.attr('donor_id', donorID);
+      
+      this.scope.attr('loading', true);
+      
       // Saving this to the server will create a donor relation, and do nothing
       // else.
       Donor.saveRelation(donorID)
+        .always(() => {
+            this.scope.attr('loading', false);
+        })
         .then(() => {
             Navigator.openPage('donor', {donorId: donorID});
         })

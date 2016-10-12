@@ -35,5 +35,12 @@
         <textarea name="donItem_description" id="donItem_description"></textarea>
     </form>
     <!-- add donation -->
-    <button class="mrgntop50 ui-btn ui-shadow ui-corner-all add" class="i18n">加入捐赠</button>
+    <button class="mrgntop50 ui-btn ui-shadow ui-corner-all add" class="i18n">
+        {{#if loading}}
+          <i class="fa fa-spinner fa-spin i18n" style="color:grey;"></i>
+        {{else}}
+          加入捐赠
+        {{/if}}
+    </button>
+    <!-- <span class="loader" style="display:none"><span class="loader-inner"></span></span> -->
 </div>

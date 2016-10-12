@@ -40,13 +40,19 @@ export default Page.extend('AddDonation', {
   '.add click' (el, ev) {
       ev.preventDefault();
       
+      this.scope.attr('loading', true);
+      
       var donation = new Donation;
       var values = this.element.find('form').serializeArray();
       values.forEach((value) => {
           donation.attr(value.name, value.value);
       });
       donation.attr('donor_id', this.scope.donor.donor_id);
+      
       donation.save()
+        .always(() => {
+          this.scope.attr('loading', false);
+        })
         .then(() => {
             Navigator.openParentPage();
         })
