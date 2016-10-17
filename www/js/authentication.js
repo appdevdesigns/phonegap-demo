@@ -8,7 +8,11 @@ const Authentication = {
     login: function (username, password) {
         var self = this;
         var serverURL = Config.getServer();
-        var authType = 'CAS';
+        var config = Config.getConfig();
+        var authType = 'local';
+        if (config.auth && config.auth.type) {
+            authType = config.auth.type;
+        }
         
         var dfd = $.Deferred();
         

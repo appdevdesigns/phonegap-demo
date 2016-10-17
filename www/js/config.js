@@ -3,7 +3,11 @@
 import $ from 'jquery';
 import can from 'can';
 
-let config = {};
+let config = {
+    auth: {
+        type: 'local'
+    }
+};
 
 const attrs = can.Map();
 
